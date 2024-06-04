@@ -2,7 +2,7 @@ CC = cc
 
 NAME = cub3d
 
-LIB = inc/libft/libft.a
+LIB = inc/libs42/libs42.a
 
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
@@ -22,16 +22,16 @@ MLX42:
 	@cd MLX42 && cmake -B build && cmake --build build -j4
 
 $(LIB):
-	cd inc/libft && make
+	cd inc/libs42 && make
 
 clean:
 	@rm -rf MLX42
 	@rm -f $(OBJ)
-	@cd inc/libft && make clean
+	@cd inc/libs42 && make clean
 
 fclean: clean
 	@rm -f $(NAME)
-	@cd inc/libft && make fclean
+	@cd inc/libs42 && make fclean
 
 re: fclean all
 
