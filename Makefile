@@ -8,7 +8,7 @@ CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
 MLXFLAGS = -L/opt/homebrew/opt/glfw/lib -lglfw -framework OpenGL
 
-SRC = src/main.c
+SRC = src/main.c src/parsing/parse.c src/parsing/texture.c src/parsing/map.c src/parsing/color.c
 
 OBJ = $(SRC:.c=.o)
 
