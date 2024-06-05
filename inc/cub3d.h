@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/05 11:33:39 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/05 12:39:07 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ typedef struct s_data
 
 
 void		parse(t_data *data, char *path);
-void		parse_texture(t_data *data, int fd);
-void		parse_color(t_data *data, int fd);
+void		parse_texture(t_data *data, int fd, char *line, int *t_count);
+void		parse_color(t_data *data, int fd, char *line, int *c_count);
 void		parse_map(t_data *data, int fd);
 void		parse_error(t_data *data, int fd, char *msg);
 

@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:16:52 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/05 12:20:23 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/05 12:46:17 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,12 @@ static bool	extract_color(t_data *data, char *line)
 	return (true);
 }
 
-void	parse_color(t_data *data, int fd)
+void	parse_color(t_data *data, int fd, char *line, int *c_count)
 {
-	char	*line;
-	int		colors;
-
-	colors = 0;
-	line = get_next_line(fd);
-	while (line && colors < 2)
+	if (ft_strncmp(line, "C ", 2) == 0 || ft_strncmp(line, "F ", 2) == 0)
 	{
-		if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
-			line[ft_strlen(line) - 1] = '\0';
-		if (ft_strncmp(line, "C ", 2) == 0 || ft_strncmp(line, "F ", 2) == 0)
-		{
-			if (!extract_color(data, line))
-				parse_error(data, fd, "Could not extract color");
-			colors++;
-		}
-		free(line);
-		line = get_next_line(fd);
+		if (!extract_color(data, line))
+			parse_error(data, fd, "Could not extract color");
+		(*c_count)++;
 	}
 }

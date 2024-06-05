@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:44:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/05 10:45:32 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/05 12:40:26 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 // void	parse_map(t_data *data, int fd)
 // {
-// 	// parse map
+	// parse map
 // }
