@@ -6,19 +6,11 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:44:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/06 00:10:22 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/06 01:41:34 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
-
-/*
-1. get map size
-2. allocate memory for map
-3. fill map with spaces
-4. fill map with actual map
-5. check if map is valid
-*/
 
 static bool	get_map_size(char *path, t_map *map)
 {
@@ -47,7 +39,7 @@ static bool	get_map_size(char *path, t_map *map)
 	return (true);
 }
 
-static bool	allocate_map(t_data *data)
+bool	allocate_map(t_data *data, char ***allocate_to)
 {
 	int	i;
 	char **map;
@@ -64,7 +56,8 @@ static bool	allocate_map(t_data *data)
 			return (free_split(map), false);
 		ft_memset(map[i], ' ', data->map->width);
 	}
-	data->map->map = map;
+	*allocate_to = map;
+	(void)allocate_to;
 	return (true);
 }
 
@@ -96,11 +89,12 @@ void	parse_map(t_data *data, char *path, int fd)
 {
 	if (!get_map_size(path, data->map))
 		parse_error(data, fd, "Open failed");
-	printf("map height: %d, width: %d\n", data->map->height, data->map->width);
-	if (!allocate_map(data))
+	if (!allocate_map(data, &data->map->map))
 		parse_error(data, fd, "Malloc failed");
 	copy_map_from_file(data->map, fd);
-	for (int i = 0; i < data->map->height; i++)
-		printf(".%s.\n", data->map->map[i]);
-	
+	//print map:
+	// for (int i = 0; i < data->map->height; i++)
+	// 	printf(".%s.\n", data->map->map[i]);
+	if (!check_map(data))
+		parse_error(data, fd, "The map doesnt fulfill all criteria");
 }
