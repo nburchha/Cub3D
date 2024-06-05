@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/05 12:07:53 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/05 23:22:53 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,28 @@ void	print_data(t_data *data)
 	printf("FLOOR: Red: %u, Green: %u, Blue: %u\n", r, g, b);
 }
 
-static void	init_data(t_data *data)
+static void	init_data(t_data *data, t_map *map)
 {
+	map->map = NULL;
+	map->height = 0;
+	map->width = 0;
 	data->ceiling_color = 0;
 	data->floor_color = 0;
 	data->n_texture = NULL;
 	data->s_texture = NULL;
 	data->w_texture = NULL;
 	data->e_texture = NULL;
-	data->map = NULL;
+	data->map = map;
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	t_map	map;
 
 	if (argc != 2)
 		return (ft_printf("Error\nInvalid number of arguments\n"), 1);
-	init_data(&data);
+	init_data(&data, &map);
 	parse(&data, argv[1]);
 	print_data(&data);
 
