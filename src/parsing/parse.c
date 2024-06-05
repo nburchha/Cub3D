@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:02:04 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/05 12:51:37 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/05 16:48:18 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	parse(t_data *data, char *path)
 	line = get_next_line(fd);
 	while (line && (c_count < 2 || t_count < 4))
 	{
+		if (line[0] == ' ')
+			break ;
 		if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		parse_color(data, fd, line, &c_count);
@@ -69,6 +71,6 @@ void	parse(t_data *data, char *path)
 	}
 	if (c_count < 2 || t_count < 4 || !line)
 		parse_error(data, fd, "Not all requirements met inside .cub file");
-	// parse_map(data, fd);
+	parse_map(data, fd);
 	close(fd);
 }
