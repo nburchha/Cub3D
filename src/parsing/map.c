@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:44:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/06 02:01:21 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/06 10:25:40 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,8 @@ void	parse_map(t_data *data, char *path, int fd)
 	if (!allocate_map(data, &data->map->map))
 		parse_error(data, fd, "Malloc failed");
 	copy_map_from_file(data->map, fd);
-	//print map:
-	// for (int i = 0; i < data->map->height; i++)
-	// 	printf(".%s.\n", data->map->map[i]);
 	if (!check_map(data))
 		parse_error(data, fd, "The map doesnt fulfill all criteria");
+	data->player.pos.x = data->map->spawn.x;
+	data->player.pos.y = data->map->spawn.y;
 }

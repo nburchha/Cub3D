@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/06 01:59:36 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/06 12:36:07 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-void	print_data(t_data *data)
-{
-	printf("n_texture: %p\n", data->n_texture);
-	printf("s_texture: %p\n", data->s_texture);
-	printf("w_texture: %p\n", data->w_texture);
-	printf("e_texture: %p\n", data->e_texture);
-	uint32_t color = data->ceiling_color;
-	uint8_t r = (color >> 16) & 0xFF;
-	uint8_t g = (color >> 8) & 0xFF;
-	uint8_t b = color & 0xFF;
-	printf("CEILING: Red: %u, Green: %u, Blue: %u\n", r, g, b);
-	color = data->floor_color;
-	r = (color >> 16) & 0xFF;
-	g = (color >> 8) & 0xFF;
-	b = color & 0xFF;
-	printf("FLOOR: Red: %u, Green: %u, Blue: %u\n", r, g, b);
-}
 
 static void	init_data(t_data *data, t_map *map)
 {
@@ -44,6 +26,17 @@ static void	init_data(t_data *data, t_map *map)
 	data->map = map;
 }
 
+static bool	init_mlx(t_data *data)
+{
+	data->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
+	if (!data->mlx)
+		return (false);
+	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->image)
+		return (false);
+	return (true);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -54,6 +47,14 @@ int	main(int argc, char **argv)
 	init_data(&data, &map);
 	parse(&data, argv[1]);
 	print_data(&data);
-
-	return (0);
+	if (!init_mlx(&data))
+		return (ft_printf("Error\nFailed to initialize MLX\n"), 1); //TODO: handle cleanup
+	render_map(&data);
+	render_player(&data);
+	printf("scale: %f\n", data.scale);
+	mlx_image_to_window(data.mlx, data.image, 0, 0);
+	mlx_key_hook(data.mlx, &keyhook, (void *)&data);
+	mlx_loop(data.mlx);
+	mlx_terminate(data.mlx);
+	return (0); //TODO: handle cleanup
 }
