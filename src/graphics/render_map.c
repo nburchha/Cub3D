@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:48:04 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/06 10:46:53 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/06 12:40:50 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void	draw_block(t_data *data, int x, int y, uint32_t color)
 	int		j;
 
 	i = -1;
-	while (++i < data->scale)
+	while (++i < PIXEL_SIZE)
 	{
 		j = -1;
-		while (++j < data->scale)
+		while (++j < PIXEL_SIZE)
 		{
-			if (i == 0 || i == data->scale - 1 || j == 0 || j == data->scale - 1)
-				mlx_put_pixel(data->image, x * data->scale + i, y * data->scale + j, 0xFFFFFFFF);
+			if (i == 0 || i == PIXEL_SIZE - 1 || j == 0 || j == PIXEL_SIZE - 1)
+				mlx_put_pixel(data->image, x * PIXEL_SIZE + i, y * PIXEL_SIZE + j, 0xFFFFFFFF);
 			else
-				mlx_put_pixel(data->image, x * data->scale + i, y * data->scale + j, color);
+				mlx_put_pixel(data->image, x * PIXEL_SIZE + i, y * PIXEL_SIZE + j, color);
 		}
 	}
 }

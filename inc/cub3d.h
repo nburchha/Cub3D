@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/06 10:54:48 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/06 12:41:57 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # include <unistd.h>
 # include <math.h>
 
-# define WIDTH 2000
-# define HEIGHT 1000
+# define WIDTH 2048
+# define HEIGHT 1024
+# define PIXEL_SIZE 64
 
 typedef struct s_coordinates
 {
