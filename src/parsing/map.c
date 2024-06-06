@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:44:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/06 01:41:34 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/06 02:01:21 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static bool	get_map_size(char *path, t_map *map)
 
 bool	allocate_map(t_data *data, char ***allocate_to)
 {
-	int	i;
-	char **map;
+	int		i;
+	char	**map;
 
 	map = malloc((data->map->height + 1) * sizeof(char *));
 	if (!map)
@@ -63,8 +63,8 @@ bool	allocate_map(t_data *data, char ***allocate_to)
 
 static void	copy_map_from_file(t_map *map, int fd)
 {
-	int	i;
-	char *line;
+	int		i;
+	char	*line;
 
 	i = -1;
 	line = get_next_line(fd);

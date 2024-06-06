@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:16:52 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/05 12:46:17 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/06 02:01:56 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static bool	convert_to_int(char **rgb_char, uint32_t *color)
 	}
 	if (i != 3)
 		return (false);
-	*color = (0xFF << 24 | (uint32_t)rgb[0] << 16 | (uint32_t)rgb[1] << 8 | (uint32_t)rgb[2]);
+	*color = (0xFF << 24 | (uint32_t)rgb[0] << 16 | (uint32_t)rgb[1] << 8 \
+			| (uint32_t)rgb[2]);
 	return (true);
 }
 

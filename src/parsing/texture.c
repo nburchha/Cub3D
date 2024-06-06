@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:14:54 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/05 12:40:00 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/06 02:00:48 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static bool	save_texture(t_data *data, char *line)
 
 void	parse_texture(t_data *data, int fd, char *line, int *t_count)
 {
-		if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0 \
+	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0 \
 		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
-		{
-			if (!save_texture(data, line))
-				parse_error(data, fd, "Could not load texture");
-			(*t_count)++;
-		}
+	{
+		if (!save_texture(data, line))
+			parse_error(data, fd, "Could not load texture");
+		(*t_count)++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/06 01:27:29 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/06 01:59:36 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ void	print_data(t_data *data)
 	uint8_t r = (color >> 16) & 0xFF;
 	uint8_t g = (color >> 8) & 0xFF;
 	uint8_t b = color & 0xFF;
-
 	printf("CEILING: Red: %u, Green: %u, Blue: %u\n", r, g, b);
 	color = data->floor_color;
 	r = (color >> 16) & 0xFF;
 	g = (color >> 8) & 0xFF;
 	b = color & 0xFF;
-
 	printf("FLOOR: Red: %u, Green: %u, Blue: %u\n", r, g, b);
 }
 
