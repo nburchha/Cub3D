@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/06 01:58:59 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/06 02:18:36 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <math.h>
+
+# define WIDTH 1200
+# define HEIGHT 1000
 
 typedef struct s_coordinates
 {
@@ -37,6 +40,8 @@ typedef struct s_map
 
 typedef struct s_data
 {
+	mlx_t			*mlx;
+	mlx_image_t		*image;
 	t_map			*map;
 	uint32_t		ceiling_color;
 	uint32_t		floor_color;
