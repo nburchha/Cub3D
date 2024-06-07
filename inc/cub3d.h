@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/07 11:36:34 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 15:41:52 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ void		parse_error(t_data *data, int fd, char *msg);
 void		render_map(t_data *data);
 void		render_player(t_data *data);
 void		reset_image(mlx_image_t *image, mlx_t *mlx, int color);
+void		normalize_angle(float *angle);
+
+/*PLAYER*/
+void		movement(t_data *data);
+
 
 /*HOOKS*/
 void		keyhook(mlx_key_data_t keydata, void *param);
