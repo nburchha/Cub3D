@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:44:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/07 11:30:12 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 15:48:04 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,4 @@ void	parse_map(t_data *data, char *path, int fd)
 	copy_map_from_file(data->map, fd);
 	if (!check_map(data))
 		parse_error(data, fd, "The map doesnt fulfill all criteria");
-	printf("checked map\n");
 }

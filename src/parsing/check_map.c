@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:13:08 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/07 15:36:08 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 15:50:26 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ static void	save_spawn(t_data *data, int i, int j)
 	data->player.pos.x = j * PIXEL_SIZE + PIXEL_SIZE / 2;
 	data->player.pos.y = i * PIXEL_SIZE + PIXEL_SIZE / 2;
 	if (data->map->map[i][j] == 'N')
-		data->player.dir = 0;
-	else if (data->map->map[i][j] == 'E')
 		data->player.dir = M_PI / 2;
+	else if (data->map->map[i][j] == 'E')
+		data->player.dir = 0;
 	else if (data->map->map[i][j] == 'S')
-		data->player.dir = M_PI;
-	else if (data->map->map[i][j] == 'W')
 		data->player.dir = 3 * M_PI / 2;
+	else if (data->map->map[i][j] == 'W')
+		data->player.dir = M_PI;
 }
 
 bool	check_map(t_data *data)
