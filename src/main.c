@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/07 09:08:27 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 11:09:49 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	main(int argc, char **argv)
 	printf("scale: %f\n", data.scale);
 	mlx_image_to_window(data.mlx, data.image, 0, 0);
 	mlx_key_hook(data.mlx, &keyhook, (void *)&data);
+	mlx_loop_hook(data.mlx, &general_hook, (void *)&data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	return (0); //TODO: handle cleanup

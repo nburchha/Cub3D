@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/07 09:08:21 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 11:11:57 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # define HEIGHT 1024
 # define PIXEL_SIZE 64
 # define FOV 60
-# define MOVE_SPEED 0.3f
+# define MOVE_SPEED 0.1f
+# define ROTATE_SPEED 0.1f
 # define MAX_KEY 266
 
 typedef struct s_coordinates
@@ -80,6 +81,7 @@ void		reset_image(mlx_image_t *image, mlx_t *mlx, int color);
 
 /*HOOKS*/
 void		keyhook(mlx_key_data_t keydata, void *param);
+void		general_hook(void *param);
 
 /*DEBUG*/
 void		print_data(t_data *data);
