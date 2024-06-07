@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/07 11:36:09 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 15:25:06 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	draw_circle(float x, float y, uint32_t color, t_data *data)
 	int		i;
 	int		j;
 
-	radius = PIXEL_SIZE / 4;
+	radius = PIXEL_SIZE / 8;
 	i = -1;
 	while (++i < PIXEL_SIZE)
 	{
@@ -64,8 +64,8 @@ void	render_player(t_data *data)
 	t_coordinates start;
 	t_coordinates end;
 
-	printf("player pos x: %f\n", data->player.pos.x);
-	printf("player dir: %f\n", data->player.dir);
+	// printf("player pos x: %f\n", data->player.pos.x);
+	// printf("player dir: %f\n", data->player.dir);
 	draw_circle(data->player.pos.x, data->player.pos.y, 0xFF0000FF, data);
 	start = (t_coordinates){data->player.pos.x, data->player.pos.y};
 	end = (t_coordinates){start.x + cos(data->player.dir) * PIXEL_SIZE, start.y - sin(data->player.dir) * PIXEL_SIZE};
