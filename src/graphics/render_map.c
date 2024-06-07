@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:48:04 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/06 12:40:50 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/07 11:23:26 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
-
-static void	calc_scale(t_data *data)
-{
-	if (data->map->width > data->map->height)
-		data->scale = WIDTH / data->map->width;
-	else
-		data->scale = HEIGHT / data->map->height;
-}
 
 void	draw_block(t_data *data, int x, int y, uint32_t color)
 {
@@ -44,7 +36,6 @@ void	render_map(t_data *data)
 	int		x;
 	int		y;
 
-	calc_scale(data);
 	y = -1;
 	while (++y < data->map->height)
 	{

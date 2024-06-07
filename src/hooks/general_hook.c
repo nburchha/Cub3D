@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:08:59 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/07 11:11:15 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 11:22:04 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,23 @@ void	normalize_angle(float *angle)
 		*angle -= 2 * M_PI;
 }
 
+static bool	wall_collision(t_data *data)
+{
+	// float		x;
+	// float		y;
+
+	// x = data->player.pos.x + cos(data->player.dir) * MOVE_SPEED;
+	// y = data->player.pos.y - sin(data->player.dir) * MOVE_SPEED;
+	// if (data->map->map[(int)y][(int)x] == '1')
+	// 	return (true);
+	// return (false);
+	(void)data;
+	return (false);
+}
+
 void	movement(t_data *data)
 {
-	if (data->keys[MLX_KEY_W])
+	if (data->keys[MLX_KEY_W] && !wall_collision(data))
 	{
 		data->player.pos.x += cos(data->player.dir) * MOVE_SPEED;
 		data->player.pos.y -= sin(data->player.dir) * MOVE_SPEED;

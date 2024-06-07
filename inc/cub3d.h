@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/07 11:11:57 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 11:36:34 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define HEIGHT 1024
 # define PIXEL_SIZE 64
 # define FOV 60
-# define MOVE_SPEED 0.1f
+# define MOVE_SPEED 3.0f
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 266
 

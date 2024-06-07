@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/07 11:07:51 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 11:36:09 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_circle(float x, float y, uint32_t color, t_data *data)
 		{
 			dist = sqrtf((i - radius) * (i - radius) + (j - radius) * (j - radius));
 			if (dist < radius)
-				mlx_put_pixel(data->image, x * PIXEL_SIZE + i + radius, y * PIXEL_SIZE + j + radius, color);
+				mlx_put_pixel(data->image, x + i - radius, y + j - radius, color);
 		}
 	}
 }
@@ -43,7 +43,6 @@ void draw_line(t_coordinates start, t_coordinates end, uint32_t color, t_data *d
 
 	dx = end.x - start.x;
 	dy = end.y - start.y;
-	// step = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy);
 	if (fabs(dx) > fabs(dy))
 		step = fabs(dx);
 	else
@@ -65,10 +64,10 @@ void	render_player(t_data *data)
 	t_coordinates start;
 	t_coordinates end;
 
-	// printf("player pos x: %f\n", data->player.pos.x);
-	// printf("player dir: %f\n", data->player.dir);
+	printf("player pos x: %f\n", data->player.pos.x);
+	printf("player dir: %f\n", data->player.dir);
 	draw_circle(data->player.pos.x, data->player.pos.y, 0xFF0000FF, data);
-	start = (t_coordinates){data->player.pos.x * PIXEL_SIZE + PIXEL_SIZE / 2, data->player.pos.y * PIXEL_SIZE + PIXEL_SIZE / 2};
+	start = (t_coordinates){data->player.pos.x, data->player.pos.y};
 	end = (t_coordinates){start.x + cos(data->player.dir) * PIXEL_SIZE, start.y - sin(data->player.dir) * PIXEL_SIZE};
-	draw_line(start, end, 0xFF0000FF, data);
+	draw_line(data->player.pos, end, 0xFF0000FF, data);
 }
