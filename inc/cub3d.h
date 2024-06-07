@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/06 12:41:57 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/07 15:41:52 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # define WIDTH 2048
 # define HEIGHT 1024
 # define PIXEL_SIZE 64
+# define FOV 60
+# define MOVE_SPEED 3.0f
+# define ROTATE_SPEED 0.1f
+# define MAX_KEY 266
 
 typedef struct s_coordinates
 {
@@ -52,6 +56,7 @@ typedef struct s_data
 	t_map			*map;
 	t_player		player;
 	float			scale;
+	bool			keys[MAX_KEY];
 	uint32_t		ceiling_color;
 	uint32_t		floor_color;
 	mlx_texture_t	*n_texture;
@@ -73,9 +78,15 @@ void		parse_error(t_data *data, int fd, char *msg);
 void		render_map(t_data *data);
 void		render_player(t_data *data);
 void		reset_image(mlx_image_t *image, mlx_t *mlx, int color);
+void		normalize_angle(float *angle);
+
+/*PLAYER*/
+void		movement(t_data *data);
+
 
 /*HOOKS*/
 void		keyhook(mlx_key_data_t keydata, void *param);
+void		general_hook(void *param);
 
 /*DEBUG*/
 void		print_data(t_data *data);
