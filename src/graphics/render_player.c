@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/07 15:25:06 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 15:38:33 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,17 @@ void	draw_circle(float x, float y, uint32_t color, t_data *data)
 		j = -1;
 		while (++j < PIXEL_SIZE)
 		{
-			dist = sqrtf((i - radius) * (i - radius) + (j - radius) * (j - radius));
+			dist = sqrtf((i - radius) * (i - radius) + (j - radius) * \
+						(j - radius));
 			if (dist < radius)
-				mlx_put_pixel(data->image, x + i - radius, y + j - radius, color);
+				mlx_put_pixel(data->image, x + i - radius, y + \
+								j - radius, color);
 		}
 	}
 }
 
-void draw_line(t_coordinates start, t_coordinates end, uint32_t color, t_data *data)
+void	draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
+				t_data *data)
 {
 	float	dx;
 	float	dy;
@@ -61,13 +64,12 @@ void draw_line(t_coordinates start, t_coordinates end, uint32_t color, t_data *d
 
 void	render_player(t_data *data)
 {
-	t_coordinates start;
-	t_coordinates end;
+	t_coordinates	start;
+	t_coordinates	end;
 
-	// printf("player pos x: %f\n", data->player.pos.x);
-	// printf("player dir: %f\n", data->player.dir);
 	draw_circle(data->player.pos.x, data->player.pos.y, 0xFF0000FF, data);
 	start = (t_coordinates){data->player.pos.x, data->player.pos.y};
-	end = (t_coordinates){start.x + cos(data->player.dir) * PIXEL_SIZE, start.y - sin(data->player.dir) * PIXEL_SIZE};
+	end = (t_coordinates){start.x + cos(data->player.dir) * PIXEL_SIZE, \
+		start.y - sin(data->player.dir) * PIXEL_SIZE};
 	draw_line(data->player.pos, end, 0xFF0000FF, data);
 }

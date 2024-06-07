@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:48:04 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/07 11:23:26 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 15:37:02 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ void	draw_block(t_data *data, int x, int y, uint32_t color)
 		while (++j < PIXEL_SIZE)
 		{
 			if (i == 0 || i == PIXEL_SIZE - 1 || j == 0 || j == PIXEL_SIZE - 1)
-				mlx_put_pixel(data->image, x * PIXEL_SIZE + i, y * PIXEL_SIZE + j, 0xFFFFFFFF);
+				mlx_put_pixel(data->image, x * PIXEL_SIZE + i, y * PIXEL_SIZE \
+							+ j, 0xFFFFFFFF);
 			else
-				mlx_put_pixel(data->image, x * PIXEL_SIZE + i, y * PIXEL_SIZE + j, color);
+				mlx_put_pixel(data->image, x * PIXEL_SIZE + i, y * PIXEL_SIZE \
+							+ j, color);
 		}
 	}
 }

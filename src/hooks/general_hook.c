@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:08:59 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/07 15:26:03 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 15:35:02 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,29 @@ void	normalize_angle(float *angle)
 static bool	wall_collision(t_data *data, const char direction)
 {
 	t_coordinates	pos;
-	float			half_size = PIXEL_SIZE / 8; //player cant move closer to a wall
+	float			player_size;
 
+	player_size = PIXEL_SIZE / 8; //player cant move closer to a wall
 	if (direction == 'W')
-	{
-		pos.x = data->player.pos.x + cos(data->player.dir) * MOVE_SPEED;
-		pos.y = data->player.pos.y - sin(data->player.dir) * MOVE_SPEED;
-	}
+		pos = (t_coordinates){data->player.pos.x + cos(data->player.dir) * \
+		MOVE_SPEED, data->player.pos.y - sin(data->player.dir) * MOVE_SPEED};
 	else if (direction == 'S')
-	{
-		pos.x = data->player.pos.x - cos(data->player.dir) * MOVE_SPEED;
-		pos.y = data->player.pos.y + sin(data->player.dir) * MOVE_SPEED;
-	}
+		pos = (t_coordinates){data->player.pos.x - cos(data->player.dir) * \
+		MOVE_SPEED, data->player.pos.y + sin(data->player.dir) * MOVE_SPEED};
 	else if (direction == 'A')
-	{
-		pos.x = data->player.pos.x - sin(data->player.dir) * MOVE_SPEED;
-		pos.y = data->player.pos.y - cos(data->player.dir) * MOVE_SPEED;
-	}
+		pos = (t_coordinates){data->player.pos.x - sin(data->player.dir) * \
+		MOVE_SPEED, data->player.pos.y - cos(data->player.dir) * MOVE_SPEED};
 	else
-	{
-		pos.x = data->player.pos.x + sin(data->player.dir) * MOVE_SPEED;
-		pos.y = data->player.pos.y + cos(data->player.dir) * MOVE_SPEED;
-	}
-
-	// Check collision for each corner of the player's bounding box
-	if (data->map->map[(int)((pos.y - half_size) / PIXEL_SIZE)][(int)((pos.x - half_size) / PIXEL_SIZE)] == '1' ||
-		data->map->map[(int)((pos.y - half_size) / PIXEL_SIZE)][(int)((pos.x + half_size) / PIXEL_SIZE)] == '1' ||
-		data->map->map[(int)((pos.y + half_size) / PIXEL_SIZE)][(int)((pos.x - half_size) / PIXEL_SIZE)] == '1' ||
-		data->map->map[(int)((pos.y + half_size) / PIXEL_SIZE)][(int)((pos.x + half_size) / PIXEL_SIZE)] == '1')
-	{
+		pos = (t_coordinates){data->player.pos.x + sin(data->player.dir) * \
+		MOVE_SPEED, data->player.pos.y + cos(data->player.dir) * MOVE_SPEED};
+	if (data->map->map[(int)((pos.y - player_size) / PIXEL_SIZE)][(int)((pos.x \
+	- player_size) / PIXEL_SIZE)] == '1' || data->map->map[(int)((pos.y - \
+	player_size) / PIXEL_SIZE)][(int)((pos.x + player_size) / PIXEL_SIZE)] == \
+	'1' || data->map->map[(int)((pos.y + player_size) / PIXEL_SIZE)][(int) \
+	((pos.x - player_size) / PIXEL_SIZE)] == '1' || data->map->map[(int) \
+	((pos.y + player_size) / PIXEL_SIZE)][(int)((pos.x + player_size) / \
+	PIXEL_SIZE)] == '1')
 		return (true);
-	}
-
 	return (false);
 }
 
@@ -83,13 +74,13 @@ void	movement(t_data *data)
 	if (data->keys[MLX_KEY_LEFT])
 		data->player.dir += ROTATE_SPEED;
 	if (data->keys[MLX_KEY_RIGHT])
-		data->player.dir -= ROTATE_SPEED; 
+		data->player.dir -= ROTATE_SPEED;
 	normalize_angle(&data->player.dir);
 }
 
 void	general_hook(void *param)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = (t_data *)param;
 	movement(data);

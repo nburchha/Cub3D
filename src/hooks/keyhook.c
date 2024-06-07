@@ -6,15 +6,15 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:00:10 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/07 11:11:25 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 15:38:44 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-void keyhook(mlx_key_data_t keydata, void *param)
+void	keyhook(mlx_key_data_t keydata, void *param)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = (t_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE)
