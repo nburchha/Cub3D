@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/06 12:36:07 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/07 09:08:27 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 static void	init_data(t_data *data, t_map *map)
 {
+	int	i;
+
+	i = -1;
+	while (++i < MAX_KEY)
+		data->keys[i] = false;
 	map->map = NULL;
 	map->height = 0;
 	map->width = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/06 12:41:57 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/07 09:08:21 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # define WIDTH 2048
 # define HEIGHT 1024
 # define PIXEL_SIZE 64
+# define FOV 60
+# define MOVE_SPEED 0.3f
+# define MAX_KEY 266
 
 typedef struct s_coordinates
 {
@@ -52,6 +55,7 @@ typedef struct s_data
 	t_map			*map;
 	t_player		player;
 	float			scale;
+	bool			keys[MAX_KEY];
 	uint32_t		ceiling_color;
 	uint32_t		floor_color;
 	mlx_texture_t	*n_texture;

@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:13:08 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/06 01:41:27 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/07 08:51:15 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,20 @@ static bool	check_surrounding_borders(t_data *data)
 	return (free_split(map), true);
 }
 
+static void	save_spawn(t_data *data, int i, int j)
+{
+	data->map->spawn.x = j;
+	data->map->spawn.y = i;
+	if (data->map->map[i][j] == 'N')
+			data->player.dir = 0;
+	else if (data->map->map[i][j] == 'E')
+		data->player.dir = M_PI / 2;
+	else if (data->map->map[i][j] == 'S')
+		data->player.dir = M_PI;
+	else if (data->map->map[i][j] == 'W')
+		data->player.dir = 3 * M_PI / 2;
+}
+
 bool	check_map(t_data *data)
 {
 	char	**map;
@@ -70,10 +84,7 @@ bool	check_map(t_data *data)
 		while (map[i][++j])
 		{
 			if (ft_strchr("NSWE", map[i][j]) && ++spawn > 0)
-			{
-				data->map->spawn.y = i;
-				data->map->spawn.x = j;
-			}
+				save_spawn(data, i, j);
 			if (!ft_strchr("NSWE 10", map[i][j]))
 				return (false);
 		}
