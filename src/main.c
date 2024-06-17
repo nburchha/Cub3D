@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/07 11:09:49 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/17 17:45:35 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv)
 		return (ft_printf("Error\nInvalid number of arguments\n"), 1);
 	init_data(&data, &map);
 	parse(&data, argv[1]);
-	print_data(&data);
+	// print_data(&data);
 	if (!init_mlx(&data))
 		return (ft_printf("Error\nFailed to initialize MLX\n"), 1); //TODO: handle cleanup
 	render_map(&data);

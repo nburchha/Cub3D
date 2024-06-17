@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/07 15:41:52 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/17 18:40:36 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,35 @@
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 266
 
+
 typedef struct s_coordinates
 {
 	float		x;
 	float		y;
 }	t_coordinates;
+
+typedef struct s_dda
+{
+	// char			**map;
+	float			angle;
+
+	float			start_x;
+	float			start_y;
+
+	float			delta_x;
+	float			delta_y;
+
+	float			end_x;
+	float			end_y;
+
+	float			len;
+
+	int				step_direction_x;
+	int				step_direction_y;
+
+	char			wall_face;
+
+}				t_dda;
 
 typedef struct s_map
 {
@@ -78,9 +102,13 @@ void		parse_error(t_data *data, int fd, char *msg);
 void		render_map(t_data *data);
 void		render_player(t_data *data);
 void		reset_image(mlx_image_t *image, mlx_t *mlx, int color);
-void		normalize_angle(float *angle);
+float		normalize_angle(float angle);
+
+void	draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
+				t_data *data);
 
 /*PLAYER*/
+void		dda_algo(t_data *data, float angle);
 void		movement(t_data *data);
 
 
