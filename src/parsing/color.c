@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:16:52 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/06 09:53:44 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/17 17:44:19 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

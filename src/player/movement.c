@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:40:27 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/07 15:42:02 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/17 18:40:29 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ void	movement(t_data *data)
 		data->player.dir += ROTATE_SPEED;
 	if (data->keys[MLX_KEY_RIGHT])
 		data->player.dir -= ROTATE_SPEED;
-	normalize_angle(&data->player.dir);
+	data->player.dir = normalize_angle(data->player.dir);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/07 15:38:33 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/17 18:39:44 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,16 @@ void	draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
 
 void	render_player(t_data *data)
 {
-	t_coordinates	start;
-	t_coordinates	end;
+	// t_coordinates	start;
+	// t_coordinates	end;
 
 	draw_circle(data->player.pos.x, data->player.pos.y, 0xFF0000FF, data);
-	start = (t_coordinates){data->player.pos.x, data->player.pos.y};
-	end = (t_coordinates){start.x + cos(data->player.dir) * PIXEL_SIZE, \
-		start.y - sin(data->player.dir) * PIXEL_SIZE};
-	draw_line(data->player.pos, end, 0xFF0000FF, data);
+	float ray_angle = data->player.dir - (FOV / 2) * (M_PI / 180);
+	while (ray_angle <= data->player.dir + ((FOV / 2) * (M_PI / 180)))
+	{
+		dda_algo(data, normalize_angle(ray_angle));
+		ray_angle += ((FOV / 2) * (M_PI / 180)) / WIDTH;
+	}
+
+
 }

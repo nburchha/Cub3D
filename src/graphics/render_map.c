@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:48:04 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/07 15:37:02 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/17 17:46:15 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
