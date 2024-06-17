@@ -6,11 +6,11 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:14:54 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/06 02:00:48 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/17 20:25:45 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 static bool	save_texture(t_data *data, char *line)
 {
