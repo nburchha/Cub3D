@@ -6,7 +6,7 @@
 /*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/17 18:40:36 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/17 20:13:43 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,13 @@ void		render_map(t_data *data);
 void		render_player(t_data *data);
 void		reset_image(mlx_image_t *image, mlx_t *mlx, int color);
 float		normalize_angle(float angle);
+void		reset_canvas(t_data *data);
 
 void	draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
 				t_data *data);
 
 /*PLAYER*/
-void		dda_algo(t_data *data, float angle);
+void	dda_algo(t_dda *dda, t_data *data, float angle);
 void		movement(t_data *data);
 
 

@@ -6,7 +6,7 @@
 /*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:40:27 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/17 18:40:29 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/17 20:53:47 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,19 @@ void	movement(t_data *data)
 		data->player.pos.x -= cos(data->player.dir) * MOVE_SPEED;
 		data->player.pos.y += sin(data->player.dir) * MOVE_SPEED;
 	}
-	if (data->keys[MLX_KEY_A] && !wall_collision(data, 'A'))
+	if (data->keys[MLX_KEY_D] && !wall_collision(data, 'A'))
 	{
 		data->player.pos.x -= sin(data->player.dir) * MOVE_SPEED;
 		data->player.pos.y -= cos(data->player.dir) * MOVE_SPEED;
 	}
-	if (data->keys[MLX_KEY_D] && !wall_collision(data, 'D'))
+	if (data->keys[MLX_KEY_A] && !wall_collision(data, 'D'))
 	{
 		data->player.pos.x += sin(data->player.dir) * MOVE_SPEED;
 		data->player.pos.y += cos(data->player.dir) * MOVE_SPEED;
 	}
 	if (data->keys[MLX_KEY_LEFT])
-		data->player.dir += ROTATE_SPEED;
-	if (data->keys[MLX_KEY_RIGHT])
 		data->player.dir -= ROTATE_SPEED;
+	if (data->keys[MLX_KEY_RIGHT])
+		data->player.dir += ROTATE_SPEED;
 	data->player.dir = normalize_angle(data->player.dir);
 }

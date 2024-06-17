@@ -11,7 +11,9 @@ MLXFLAGS = -L/opt/homebrew/opt/glfw/lib -lglfw -framework OpenGL
 SRC = src/main.c src/parsing/parse.c src/parsing/texture.c src/parsing/map.c \
 src/parsing/color.c src/parsing/check_map.c src/graphics/render_map.c \
 src/graphics/util.c src/hooks/keyhook.c src/printing.c src/graphics/render_player.c \
-src/hooks/general_hook.c src/player/movement.c src/dda_algo/dda_algo.c 
+src/hooks/general_hook.c src/player/movement.c src/dda_algo/dda_algo.c \
+src/graphics/reset_canvas.c
+
 
 OBJ = $(SRC:.c=.o)
 

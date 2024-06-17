@@ -6,7 +6,7 @@
 /*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:07:05 by psanger           #+#    #+#             */
-/*   Updated: 2024/06/17 18:28:23 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/17 20:15:21 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,28 +141,27 @@ void	init_dda(t_dda *dda, t_data *data, float angle)
 	get_dir(dda->angle, &dda->step_direction_x, &dda->step_direction_y);
 }
 
-void	dda_algo(t_data *data, float angle)
+void	dda_algo(t_dda *dda, t_data *data, float angle)
 {
 	int	is_wall = 0;
-	t_dda dda;
-	init_dda(&dda, data, angle);
-	dda.end_x = dda.start_x;
-	dda.end_y = dda.start_y;
+	init_dda(dda, data, angle);
+	dda->end_x = dda->start_x;
+	dda->end_y = dda->start_y;
 	while (1)
 	{
-		is_wall = get_new_pos(&dda, data->map->map);
+		is_wall = get_new_pos(dda, data->map->map);
 		if (is_wall > 0)
 			break;
 	}
-	dda.wall_face = wall_face(is_wall, &dda);
-	dda.delta_x = dda.end_x - dda.start_x;
-	dda.delta_y = dda.end_y - dda.start_y;
+	dda->wall_face = wall_face(is_wall, dda);
+	dda->delta_x = dda->end_x - dda->start_x;
+	dda->delta_y = dda->end_y - dda->start_y;
 	// printf("start |%f|, |%f|\n", dda.start_x, dda.start_y);
 	// printf("end |%f|, |%f|\n", dda.end_x, dda.end_y);
-	dda.len = pow(pow(dda.delta_x, 2) + pow(dda.delta_y, 2), 0.5);
+	dda->len = pow(pow(dda->delta_x, 2) + pow(dda->delta_y, 2), 0.5);
 
-	draw_line(data->player.pos, (t_coordinates){dda.end_x * 64, dda.end_y * 64}, 0x0000000FF, data);
-	printf("len : |%f|\n", dda.len);
+	// draw_line(data->player.pos, (t_coordinates){dda->end_x * 64, dda->end_y * 64}, 0x0000000FF, data);
+	// printf("len : |%f|\n", dda.len);
 }
 
 
