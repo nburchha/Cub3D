@@ -6,11 +6,11 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:02:04 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/07 11:26:47 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/17 20:25:45 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 /*
 parse all textures and colors

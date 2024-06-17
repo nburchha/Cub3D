@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/17 18:39:44 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/17 20:25:45 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 void	draw_circle(float x, float y, uint32_t color, t_data *data)
 {

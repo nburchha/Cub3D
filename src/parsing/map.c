@@ -6,11 +6,11 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:44:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/07 15:48:04 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/17 20:25:45 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 static bool	get_map_size(char *path, t_map *map)
 {
