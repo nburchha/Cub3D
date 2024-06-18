@@ -6,7 +6,7 @@
 /*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:40:27 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/18 18:27:35 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/18 18:55:13 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,30 @@ static bool	wall_collision(t_data *data, const char direction)
 
 void	movement(t_data *data)
 {
+	int	speed;
+
+	speed = MOVE_SPEED;
+	if (data->keys[MLX_KEY_LEFT_SHIFT])
+		speed *= 2;
 	if (data->keys[MLX_KEY_W] && !wall_collision(data, 'W'))
 	{
-		data->player.pos.x += cos(data->player.dir) * MOVE_SPEED;
-		data->player.pos.y -= sin(data->player.dir) * MOVE_SPEED;
+		data->player.pos.x += cos(data->player.dir) * speed;
+		data->player.pos.y -= sin(data->player.dir) * speed;
 	}
 	if (data->keys[MLX_KEY_S] && !wall_collision(data, 'S'))
 	{
-		data->player.pos.x -= cos(data->player.dir) * MOVE_SPEED;
-		data->player.pos.y += sin(data->player.dir) * MOVE_SPEED;
+		data->player.pos.x -= cos(data->player.dir) * speed;
+		data->player.pos.y += sin(data->player.dir) * speed;
 	}
 	if (data->keys[MLX_KEY_D] && !wall_collision(data, 'A'))
 	{
-		data->player.pos.x -= sin(data->player.dir) * MOVE_SPEED;
-		data->player.pos.y -= cos(data->player.dir) * MOVE_SPEED;
+		data->player.pos.x -= sin(data->player.dir) * speed;
+		data->player.pos.y -= cos(data->player.dir) * speed;
 	}
 	if (data->keys[MLX_KEY_A] && !wall_collision(data, 'D'))
 	{
-		data->player.pos.x += sin(data->player.dir) * MOVE_SPEED;
-		data->player.pos.y += cos(data->player.dir) * MOVE_SPEED;
+		data->player.pos.x += sin(data->player.dir) * speed;
+		data->player.pos.y += cos(data->player.dir) * speed;
 	}
 	if (data->keys[MLX_KEY_LEFT])
 		data->player.dir -= ROTATE_SPEED;

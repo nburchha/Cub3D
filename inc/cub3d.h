@@ -6,7 +6,7 @@
 /*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/18 18:16:04 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/18 18:50:44 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define FOV 60
 # define MOVE_SPEED 5.0f
 # define ROTATE_SPEED 0.1f
-# define MAX_KEY 266
+# define MAX_KEY 341
 
 
 typedef struct s_coordinates
