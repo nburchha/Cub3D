@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/18 15:05:24 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:03:44 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 
 # define WIDTH 2048
 # define HEIGHT 1024
-# define PIXEL_SIZE 64
+# define PIXEL_SIZE 64.0f
+# define MINIMAP_SIZE (PIXEL_SIZE / 4.0)
 # define FOV 60
 # define MOVE_SPEED 3.0f
 # define ROTATE_SPEED 0.1f
@@ -105,11 +106,14 @@ void		parse_error(t_data *data, int fd, char *msg);
 /*GRAPHICS*/
 void		render_map(t_data *data);
 void		render_player(t_data *data);
+void		draw_minimap(t_data *data);
 void		reset_image(mlx_image_t *image, mlx_t *mlx, int color);
 float		normalize_angle(float angle);
 
-void	draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
+void		draw_block(t_data *data, int coords[2], int size, uint32_t color);
+void		draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
 				t_data *data);
+void		draw_circle(float coords[2], float radius, uint32_t color, t_data *data);
 
 /*PLAYER*/
 void		dda_algo(t_data *data, float angle);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_hook.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:08:59 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/17 20:25:45 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/18 16:32:02 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	general_hook(void *param)
 	reset_image(data->image, data->mlx, 0x000000FF);
 	render_map(data);
 	render_player(data);
+	draw_minimap(data);
 }

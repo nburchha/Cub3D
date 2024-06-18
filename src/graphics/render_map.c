@@ -3,31 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:48:04 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/17 20:25:45 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/18 17:38:03 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_block(t_data *data, int x, int y, uint32_t color)
+void	draw_block(t_data *data, int coords[2], int size, uint32_t color)
 {
 	int		i;
 	int		j;
 
 	i = -1;
-	while (++i < PIXEL_SIZE)
+	while (++i < size)
 	{
 		j = -1;
-		while (++j < PIXEL_SIZE)
+		while (++j < size)
 		{
-			if (i == 0 || i == PIXEL_SIZE - 1 || j == 0 || j == PIXEL_SIZE - 1)
-				mlx_put_pixel(data->image, x * PIXEL_SIZE + i, y * PIXEL_SIZE \
+			if (coords[0] < 0 || coords[1] < 0 || coords[0] >= data->map->width \
+				|| coords[1] >= data->map->height)
+				continue ;
+			else if (i == 0 || i == size - 1 || j == 0 || j == size - 1)
+				mlx_put_pixel(data->image, coords[0] * size + i, coords[1] * size \
 							+ j, 0xFFFFFFFF);
 			else
-				mlx_put_pixel(data->image, x * PIXEL_SIZE + i, y * PIXEL_SIZE \
+				mlx_put_pixel(data->image, coords[0] * size + i, coords[1] * size \
 							+ j, color);
 		}
 	}
@@ -45,11 +48,13 @@ void	render_map(t_data *data)
 		while (++x < data->map->width)
 		{
 			if (data->map->map[y][x] == '1' || data->map->map[y][x] == ' ')
-				draw_block(data, x, y, data->ceiling_color);
+				draw_block(data, (int [2]){x, y}, PIXEL_SIZE, \
+							data->ceiling_color);
 			else if (data->map->map[y][x] == '0' || data->map->map[y][x] == \
 					'N' || data->map->map[y][x] == 'S' || data->map->map[y][x] \
 					== 'W' || data->map->map[y][x] == 'E')
-				draw_block(data, x, y, data->floor_color);
+				draw_block(data, (int [2]){x, y}, PIXEL_SIZE, \
+							data->floor_color);
 		}
 	}
 }
