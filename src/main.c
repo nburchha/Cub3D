@@ -6,7 +6,7 @@
 /*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/17 17:45:35 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/18 18:28:35 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 		return (ft_printf("Error\nFailed to initialize MLX\n"), 1); //TODO: handle cleanup
 	render_map(&data);
 	render_player(&data);
-	printf("scale: %f\n", data.scale);
+	// printf("scale: %f\n", data.scale);
 	mlx_image_to_window(data.mlx, data.image, 0, 0);
 	mlx_key_hook(data.mlx, &keyhook, (void *)&data);
 	mlx_loop_hook(data.mlx, &general_hook, (void *)&data);

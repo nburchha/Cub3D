@@ -6,7 +6,7 @@
 /*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/17 20:13:43 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/18 18:16:04 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define HEIGHT 1024
 # define PIXEL_SIZE 64
 # define FOV 60
-# define MOVE_SPEED 3.0f
+# define MOVE_SPEED 5.0f
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 266
 
@@ -56,6 +56,7 @@ typedef struct s_dda
 	int				step_direction_y;
 
 	char			wall_face;
+	int				texture;
 
 }				t_dda;
 
