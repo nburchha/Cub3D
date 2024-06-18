@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:40:27 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/17 20:25:45 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/18 15:20:50 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,19 @@ static bool	check_collision(t_data *data, t_coordinates pos, float player_size,
 {
 	if (xy == 'x')
 	{
-		if (data->map->map[(int)(data->player.pos.y / PIXEL_SIZE)][(int)((pos.x
-					- player_size) / PIXEL_SIZE)] == '1'
-			|| data->map->map[(int)(data->player.pos.y
-				/ PIXEL_SIZE)][(int)((pos.x + player_size)
-				/ PIXEL_SIZE)] == '1')
+		if (ft_strchr("12", data->map->map[(int)(data->player.pos.y / \
+			PIXEL_SIZE)][(int)((pos.x - player_size) / PIXEL_SIZE)])
+			|| ft_strchr("12", data->map->map[(int)(data->player.pos.y
+			/ PIXEL_SIZE)][(int)((pos.x + player_size)
+			/ PIXEL_SIZE)]))
 			return (true);
 	}
 	else if (xy == 'y')
 	{
-		if (data->map->map[(int)((pos.y - player_size)
-				/ PIXEL_SIZE)][(int)(data->player.pos.x / PIXEL_SIZE)] == '1'
-			|| data->map->map[(int)((pos.y + player_size)
-				/ PIXEL_SIZE)][(int)(data->player.pos.x / PIXEL_SIZE)] == '1')
+		if (ft_strchr("12", data->map->map[(int)((pos.y - player_size) / \
+			PIXEL_SIZE)][(int)(data->player.pos.x / PIXEL_SIZE)]) || \
+			ft_strchr("12", data->map->map[(int)((pos.y + player_size) / \
+			PIXEL_SIZE)][(int)(data->player.pos.x / PIXEL_SIZE)]))
 			return (true);
 	}
 	return (false);
