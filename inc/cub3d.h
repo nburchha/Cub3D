@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/17 18:40:36 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/18 15:05:24 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 # define MOVE_SPEED 3.0f
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 266
+
+# define FLOOR '0'
+# define WALL '1'
+# define DOOR '2'
 
 
 typedef struct s_coordinates
