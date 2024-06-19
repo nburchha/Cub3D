@@ -6,59 +6,11 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/19 17:58:46 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/19 22:43:01 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	draw_circle(float coords[2], float radius, uint32_t color, mlx_image_t *img)
-{
-	float	dist;
-	int		i;
-	int		j;
-
-	i = -1;
-	while (++i < PIXEL_SIZE)
-	{
-		j = -1;
-		while (++j < PIXEL_SIZE)
-		{
-			dist = sqrtf((i - radius) * (i - radius) + (j - radius) * (j
-						- radius));
-			if (dist < radius)
-				mlx_put_pixel(img, coords[0] + i - radius, coords[1] + \
-								j - radius, color);
-		}
-	}
-}
-
-void	draw_line(t_coordinates start, t_coordinates end, uint32_t color,
-		t_data *data)
-{
-	float	dx;
-	float	dy;
-	float	step;
-	float	x;
-	float	y;
-
-	dx = end.x - start.x;
-	dy = end.y - start.y;
-	if (fabs(dx) > fabs(dy))
-		step = fabs(dx);
-	else
-		step = fabs(dy);
-	dx /= step;
-	dy /= step;
-	x = start.x;
-	y = start.y;
-	while ((int)(x - end.x) || (int)(y - end.y))
-	{
-		mlx_put_pixel(data->image, x, y, color);
-		x += dx;
-		y += dy;
-	}
-}
 
 float	to_rad(int angle)
 {
@@ -84,15 +36,26 @@ int	get_color(t_data *data, t_dda *dda, int y_pixel, int height)
 {
 	float	x;
 	float	y;
+	float	pixel_size;
 
+	pixel_size = 0;
 	x = 0;
 	y = 0;
+
+	if (dda->wall_face == 'N')
+		pixel_size = data->n_texture->width;
+	if (dda->wall_face == 'O')
+		pixel_size = data->e_texture->width;
+	if (dda->wall_face == 'S')
+		pixel_size = data->s_texture->width;
+	if (dda->wall_face == 'W')
+		pixel_size = data->w_texture->width;
 	if (dda->wall_face == 'N' || dda->wall_face == 'S')
-		x = (dda->end_x - (int)dda->end_x) * PIXEL_SIZE;
+		x = (dda->end_x - (int)dda->end_x) * pixel_size;
 	if (dda->wall_face == 'O' || dda->wall_face == 'W')
-		x = (dda->end_y - (int)dda->end_y) * PIXEL_SIZE;
+		x = (dda->end_y - (int)dda->end_y) * pixel_size;
 	y = ((float)y_pixel - (HEIGHT / 2 - (float)height / 2)) / (float)height
-		* (float)PIXEL_SIZE;
+		* pixel_size;
 	if (dda->wall_face == 'N')
 		return (get_color_texture(data->n_texture, (int)x, (int)y));
 	if (dda->wall_face == 'O')
@@ -130,6 +93,22 @@ void	cast(t_data *data, t_dda *dda, int column)
 	}
 }
 
+void	draw_crosshair(t_data *data)
+{
+	int	i, j;
+
+	for (i = -1; i <= 1; i++)
+	{
+		for (j = 0; j < 10; j++)
+		{
+			mlx_put_pixel(data->image, WIDTH / 2 + i, HEIGHT / 2 + j, 0x000000FF);
+			mlx_put_pixel(data->image, WIDTH / 2 + i, HEIGHT / 2 - j, 0x000000FF);
+			mlx_put_pixel(data->image, WIDTH / 2 + j, HEIGHT / 2 + i, 0x000000FF);
+			mlx_put_pixel(data->image, WIDTH / 2 - j, HEIGHT / 2 + i, 0x000000FF);
+		}
+	}
+}
+
 void	render_player(t_data *data)
 {
 	float	ray_angle;
@@ -139,8 +118,8 @@ void	render_player(t_data *data)
 	ray_angle = data->player.dir - (FOV / 2) * (M_PI / 180);
 	column = 0;
 	reset_canvas(data);
-	draw_circle((float [2]){data->player.pos.x, data->player.pos.y}, PIXEL_SIZE / \
-				8, 0xFF0000FF, data->image);
+	// draw_circle((float [2]){data->player.pos.x, data->player.pos.y}, PIXEL_SIZE / \
+	// 			8, 0xFF0000FF, data->image);
 	while (ray_angle <= data->player.dir + ((FOV / 2) * (M_PI / 180)))
 	{
 		dda_algo(&dda, data, normalize_angle(ray_angle));
@@ -148,4 +127,5 @@ void	render_player(t_data *data)
 		ray_angle += (FOV) * (M_PI / 180) / WIDTH;
 		column++;
 	}
+	draw_crosshair(data);
 }

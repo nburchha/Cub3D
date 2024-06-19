@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 17:59:06 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/19 22:04:36 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int argc, char **argv)
 		return (ft_printf("Error\nInvalid number of arguments\n"), 1);
 	init_data(&data, &map);
 	parse(&data, argv[1]);
+	printf("texture height: %d width: %d\n", data.n_texture->height, data.n_texture->width);
 	if (!init_mlx(&data))
 		return (ft_printf("Error\nFailed to initialize MLX\n"), 1); //TODO: handle cleanup
 	render_map(&data);

@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:21:29 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 10:14:45 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/19 22:49:45 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static bool	valid_coords(t_data *data, int x, int y)
-{
-	if (x < 0 || y < 0 || x >= data->map->width || y >= data->map->height)
-		return (false);
-	return (true);
-}
 
 static void	draw_block_minimap(mlx_image_t *img, int pos[2], int size, \
 			int color)
@@ -60,6 +53,24 @@ void	draw_minimap_border(t_data *data)
 	}
 }
 
+void	draw_player(t_data *data)
+{
+	t_coordinates	v[3];
+
+	draw_circle((float [2]){M_SCALE * 5 + M_SCALE / 2, M_SCALE * 5 + M_SCALE \
+				/ 2}, M_SCALE / 2, 0xFF0000FF, data->minimap);
+	//calculate vertex of the triangle according to the direction of the player
+	v[0] = (t_coordinates){M_SCALE * 5 + M_SCALE / 2, M_SCALE * 5 + M_SCALE / 2};
+	v[1] = (t_coordinates){v[0].x + cosf(data->player.dir) * M_SCALE / 2, \
+	v[0].y + sinf(data->player.dir) * M_SCALE / 2};
+	v[2] = (t_coordinates){v[0].x + cosf(data->player.dir + M_PI / 2) * \
+	M_SCALE / 2, v[0].y + sinf(data->player.dir + M_PI / 2) * M_SCALE / 2};
+	// printf("v0: %f %f\nv1: %f %f\nv2: %f %f\n", v[0].x, v[0].y, v[1].x, v[1].y, v[2].x, v[2].y);
+	// draw_line(v[0], v[1], 0xFF0000FF, data->minimap);
+	draw_triangle(data, data->player.dir, 0xFF0000FF);
+	// draw_filled_triangle(v[0], v[1], v[2], 0xFF0000FF, data->minimap);
+}
+
 uint32_t	get_minimap_color(t_data *data, int x, int y)
 {
 	if (!valid_coords(data, x, y))
@@ -95,7 +106,6 @@ void	draw_minimap(t_data *data)
 		}
 		i++;
 	}
-	draw_circle((float [2]){M_SCALE * 5 + M_SCALE / 2, M_SCALE * 5 + M_SCALE \
-				/ 2}, M_SCALE / 2, 0xFF0000FF, data->minimap);
+	draw_player(data);
 	draw_minimap_border(data);
 }
