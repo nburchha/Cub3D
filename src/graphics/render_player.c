@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/19 22:43:01 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/20 00:30:54 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,18 @@ int	get_color(t_data *data, t_dda *dda, int y_pixel, int height)
 		pixel_size = data->s_texture->width;
 	if (dda->wall_face == 'W')
 		pixel_size = data->w_texture->width;
+
+	if (dda->texture == 2)
+		pixel_size = data->door_texture->width;
+
 	if (dda->wall_face == 'N' || dda->wall_face == 'S')
 		x = (dda->end_x - (int)dda->end_x) * pixel_size;
 	if (dda->wall_face == 'O' || dda->wall_face == 'W')
 		x = (dda->end_y - (int)dda->end_y) * pixel_size;
 	y = ((float)y_pixel - (HEIGHT / 2 - (float)height / 2)) / (float)height
 		* pixel_size;
+	if (dda->texture == 2)
+		return (get_color_texture(data->door_texture, (int)x, (int)y));
 	if (dda->wall_face == 'N')
 		return (get_color_texture(data->n_texture, (int)x, (int)y));
 	if (dda->wall_face == 'O')

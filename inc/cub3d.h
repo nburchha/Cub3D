@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 22:50:46 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/20 00:43:41 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ typedef struct s_dda
 	char			wall_face;
 	int				texture;
 
+	int				is_open_door;
+	float			door_end_x;
+	float			door_end_y;
 }				t_dda;
 
 typedef struct s_map
@@ -94,6 +97,7 @@ typedef struct s_data
 	mlx_texture_t	*s_texture;
 	mlx_texture_t	*w_texture;
 	mlx_texture_t	*e_texture;
+	mlx_texture_t	*door_texture;
 }	t_data;
 
 /*PARSING*/
@@ -121,7 +125,7 @@ void		draw_triangle(t_data *data, float direction, uint32_t color);
 bool		valid_coords(t_data *data, int x, int y);
 
 /*PLAYER*/
-void	dda_algo(t_dda *dda, t_data *data, float angle);
+void		dda_algo(t_dda *dda, t_data *data, float angle);
 void		movement(t_data *data);
 bool		wall_collision(t_data *data, const char direction, const char xy);
 
