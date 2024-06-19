@@ -61,7 +61,6 @@ int	main(int argc, char **argv)
 		return (ft_printf("Error\nFailed to initialize MLX\n"), 1); //TODO: handle cleanup
 	render_map(&data);
 	render_player(&data);
-	printf("scale: %f\n", data.scale);
 	mlx_key_hook(data.mlx, &keyhook, (void *)&data);
 	mlx_loop_hook(data.mlx, &general_hook, (void *)&data);
 	mlx_loop(data.mlx);

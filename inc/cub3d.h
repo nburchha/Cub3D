@@ -26,15 +26,14 @@
 # define PIXEL_SIZE 64.0f
 # define M_SCALE (PIXEL_SIZE / 4.0)
 # define FOV 60
-# define MOVE_SPEED 3.0f
+# define MOVE_SPEED 5.0f
 # define ROTATE_SPEED 0.1f
-# define MAX_KEY 266
+# define MAX_KEY 341
 # define BONUS 1
 
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
-
 
 typedef struct s_coordinates
 {
@@ -62,6 +61,7 @@ typedef struct s_dda
 	int				step_direction_y;
 
 	char			wall_face;
+	int				texture;
 
 }				t_dda;
 
@@ -111,6 +111,7 @@ void		render_player(t_data *data);
 void		draw_minimap(t_data *data);
 void		reset_image(mlx_image_t *image, mlx_t *mlx, int color);
 float		normalize_angle(float angle);
+void		reset_canvas(t_data *data);
 
 void		draw_block(t_data *data, int coords[2], int size, uint32_t color);
 void		draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
@@ -118,7 +119,7 @@ void		draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
 void		draw_circle(float coords[2], float radius, uint32_t color, mlx_image_t *img);
 
 /*PLAYER*/
-void		dda_algo(t_data *data, float angle);
+void	dda_algo(t_dda *dda, t_data *data, float angle);
 void		movement(t_data *data);
 bool		wall_collision(t_data *data, const char direction, const char xy);
 
