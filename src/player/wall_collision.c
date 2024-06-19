@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:21:59 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 16:32:46 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/19 17:57:32 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,28 @@ static t_coordinates	calculate_new_position(t_data *data,
 	return (pos);
 }
 
-static bool	check_collision(t_data *data, t_coordinates pos, float player_size,
-		const char xy)
+static bool	check_collision(t_data *data, t_coordinates pos, float player_size, \
+							const char xy)
 {
+	t_coordinates	cur_pos;
+
+	cur_pos = data->player.pos;
 	if (xy == 'x')
 	{
-		if (ft_strchr("12", data->map->map[(int)(data->player.pos.y / \
-			PIXEL_SIZE)][(int)((pos.x - player_size) / PIXEL_SIZE)])
-			|| ft_strchr("12", data->map->map[(int)(data->player.pos.y
-			/ PIXEL_SIZE)][(int)((pos.x + player_size)
-			/ PIXEL_SIZE)]))
+		if ((pos.x < cur_pos.x) && ft_strchr("12", data->map->map[(int) \
+		(cur_pos.y / PIXEL_SIZE)][(int)((pos.x - player_size) / PIXEL_SIZE)]))
+			return (true);
+		if ((pos.x > cur_pos.x) && ft_strchr("12", data->map->map[(int) \
+		(cur_pos.y / PIXEL_SIZE)][(int)((pos.x + player_size) / PIXEL_SIZE)]))
 			return (true);
 	}
 	else if (xy == 'y')
 	{
-		if (ft_strchr("12", data->map->map[(int)((pos.y - player_size) / \
-			PIXEL_SIZE)][(int)(data->player.pos.x / PIXEL_SIZE)]) || \
-			ft_strchr("12", data->map->map[(int)((pos.y + player_size) / \
-			PIXEL_SIZE)][(int)(data->player.pos.x / PIXEL_SIZE)]))
+		if ((pos.y < cur_pos.y) && ft_strchr("12", data->map->map[(int) \
+		((pos.y - player_size) / PIXEL_SIZE)][(int)(cur_pos.x / PIXEL_SIZE)]))
+			return (true);
+		if ((pos.y > cur_pos.y) && ft_strchr("12", data->map->map[(int) \
+		((pos.y + player_size) / PIXEL_SIZE)][(int)(cur_pos.x / PIXEL_SIZE)]))
 			return (true);
 	}
 	return (false);

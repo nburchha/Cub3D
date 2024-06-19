@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/19 09:44:53 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/19 17:58:46 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ void	draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
 
 void	render_player(t_data *data)
 {
-	// t_coordinates	start;
-	// t_coordinates	end;
-
 	draw_circle((float [2]){data->player.pos.x, data->player.pos.y}, PIXEL_SIZE / \
 				8, 0xFF0000FF, data->image);
 	float ray_angle = data->player.dir - (FOV / 2) * (M_PI / 180);
@@ -73,6 +70,4 @@ void	render_player(t_data *data)
 		dda_algo(data, normalize_angle(ray_angle));
 		ray_angle += ((FOV / 2) * (M_PI / 180)) / WIDTH;
 	}
-
-
 }
