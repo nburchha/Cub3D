@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:13:08 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/18 15:15:04 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/19 10:28:25 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static bool	floodfill(char **map, int x, int y)
 {
 	map[y][x] = 'X';
-	if (((y > 0 && map[y - 1][x] == ' ') || (y > 0 && map[y - 1][x] == '\0')) \
-	|| ((map[y + 1] && map[y + 1][x] == ' ') || (map[y + 1] && map[y + 1][x] \
-	== '\0')) || ((x > 0 && map[y][x - 1] == ' ') || (x > 0 && map[y][x - 1] \
-	== '\0')) || ((map[y][x + 1] && map[y][x + 1] == ' ') || (map[y][x + 1] \
-	&& map[y][x + 1] == '\0')))
+	if (((y <= 0 || map[y - 1][x] == ' ' || map[y - 1][x] == '\0')) \
+	|| ((!map[y + 1] || map[y + 1][x] == ' ' || map[y + 1][x] \
+	== '\0')) || ((x <= 0 || map[y][x - 1] == ' ' || map[y][x - 1] \
+	== '\0')) || ((!map[y][x + 1] || map[y][x + 1] == ' ' || \
+	map[y][x + 1] == '\0')))
 		return (false);
 	if (y > 0 && (map[y - 1][x] == FLOOR || map[y - 1][x] == DOOR))
 		if (!floodfill(map, x, y - 1))
