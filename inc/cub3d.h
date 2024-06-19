@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 16:23:06 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/19 22:50:46 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,10 @@ void		reset_canvas(t_data *data);
 
 void		draw_block(t_data *data, int coords[2], int size, uint32_t color);
 void		draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
-				t_data *data);
+					mlx_image_t *img);
 void		draw_circle(float coords[2], float radius, uint32_t color, mlx_image_t *img);
+void		draw_triangle(t_data *data, float direction, uint32_t color);
+bool		valid_coords(t_data *data, int x, int y);
 
 /*PLAYER*/
 void	dda_algo(t_dda *dda, t_data *data, float angle);
