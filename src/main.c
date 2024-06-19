@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 09:16:46 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/19 16:28:42 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ static bool	init_mlx(t_data *data)
 	data->minimap = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->minimap)
 		return (false);
+	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
+	mlx_image_to_window(data->mlx, data->image, 0, 0);
+	mlx_image_to_window(data->mlx, data->minimap, 0, 0);
 	return (true);
 }
 
@@ -60,8 +63,6 @@ int	main(int argc, char **argv)
 	render_map(&data);
 	render_player(&data);
 	printf("scale: %f\n", data.scale);
-	mlx_image_to_window(data.mlx, data.image, 0, 0);
-	mlx_image_to_window(data.mlx, data.minimap, 0, 0);
 	mlx_key_hook(data.mlx, &keyhook, (void *)&data);
 	mlx_loop_hook(data.mlx, &general_hook, (void *)&data);
 	mlx_loop(data.mlx);

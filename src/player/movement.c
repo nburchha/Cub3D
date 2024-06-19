@@ -6,67 +6,23 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:40:27 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/18 15:20:50 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:29:50 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_coordinates	calculate_new_position(t_data *data,
-		const char direction)
+static void	mouse_movement(t_data *data)
 {
-	t_coordinates	pos;
+	int	x;
+	int	y;
 
-	if (direction == 'W')
-		pos = (t_coordinates){data->player.pos.x + cos(data->player.dir) \
-			* MOVE_SPEED, data->player.pos.y - sin(data->player.dir) \
-			* MOVE_SPEED};
-	else if (direction == 'S')
-		pos = (t_coordinates){data->player.pos.x - cos(data->player.dir) \
-			* MOVE_SPEED, data->player.pos.y + sin(data->player.dir) \
-			* MOVE_SPEED};
-	else if (direction == 'A')
-		pos = (t_coordinates){data->player.pos.x - sin(data->player.dir) \
-			* MOVE_SPEED, data->player.pos.y - cos(data->player.dir) \
-			* MOVE_SPEED};
-	else
-		pos = (t_coordinates){data->player.pos.x + sin(data->player.dir) \
-			* MOVE_SPEED, data->player.pos.y + cos(data->player.dir) \
-			* MOVE_SPEED};
-	return (pos);
-}
-
-static bool	check_collision(t_data *data, t_coordinates pos, float player_size,
-		const char xy)
-{
-	if (xy == 'x')
-	{
-		if (ft_strchr("12", data->map->map[(int)(data->player.pos.y / \
-			PIXEL_SIZE)][(int)((pos.x - player_size) / PIXEL_SIZE)])
-			|| ft_strchr("12", data->map->map[(int)(data->player.pos.y
-			/ PIXEL_SIZE)][(int)((pos.x + player_size)
-			/ PIXEL_SIZE)]))
-			return (true);
-	}
-	else if (xy == 'y')
-	{
-		if (ft_strchr("12", data->map->map[(int)((pos.y - player_size) / \
-			PIXEL_SIZE)][(int)(data->player.pos.x / PIXEL_SIZE)]) || \
-			ft_strchr("12", data->map->map[(int)((pos.y + player_size) / \
-			PIXEL_SIZE)][(int)(data->player.pos.x / PIXEL_SIZE)]))
-			return (true);
-	}
-	return (false);
-}
-
-static bool	wall_collision(t_data *data, const char direction, const char xy)
-{
-	t_coordinates	pos;
-	float			player_size;
-
-	player_size = PIXEL_SIZE / 8;
-	pos = calculate_new_position(data, direction);
-	return (check_collision(data, pos, player_size, xy));
+	x = 0;
+	y = 0;
+	mlx_get_mouse_pos(data->mlx, &x, &y);
+	data->player.dir += ((WIDTH / 2 - x) * ROTATE_SPEED) * (M_PI / 180);
+	data->player.dir = normalize_angle(data->player.dir);
+	mlx_set_mouse_pos(data->mlx, WIDTH / 2, HEIGHT / 2);
 }
 
 static void	movement_wasd(t_data *data)
@@ -92,6 +48,8 @@ static void	movement_wasd(t_data *data)
 void	movement(t_data *data)
 {
 	movement_wasd(data);
+	if (BONUS)
+		mouse_movement(data);
 	if (data->keys[MLX_KEY_LEFT])
 		data->player.dir += ROTATE_SPEED;
 	if (data->keys[MLX_KEY_RIGHT])
