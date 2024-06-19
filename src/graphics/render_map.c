@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:48:04 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/18 17:38:03 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/19 10:16:48 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	draw_block(t_data *data, int coords[2], int size, uint32_t color)
 				|| coords[1] >= data->map->height)
 				continue ;
 			else if (i == 0 || i == size - 1 || j == 0 || j == size - 1)
-				mlx_put_pixel(data->image, coords[0] * size + i, coords[1] * size \
-							+ j, 0xFFFFFFFF);
+				mlx_put_pixel(data->image, coords[0] * size + i, coords[1] * \
+								size + j, 0xFFFFFFFF);
 			else
-				mlx_put_pixel(data->image, coords[0] * size + i, coords[1] * size \
-							+ j, color);
+				mlx_put_pixel(data->image, coords[0] * size + i, coords[1] * \
+								size + j, color);
 		}
 	}
 }

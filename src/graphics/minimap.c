@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:21:29 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 10:02:06 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/19 10:14:45 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static bool	valid_coords(t_data *data, int x, int y)
 	return (true);
 }
 
-static void	draw_block_minimap(mlx_image_t *img, int pos[2], int size, int \
-								color)
+static void	draw_block_minimap(mlx_image_t *img, int pos[2], int size, \
+			int color)
 {
 	int	i;
 	int	j;
@@ -28,13 +28,12 @@ static void	draw_block_minimap(mlx_image_t *img, int pos[2], int size, int \
 	i = 0;
 	while (i < size)
 	{
-		
 		j = 0;
 		while (j < size)
 		{
 			if (pos[0] + i >= 0 && pos[0] + i < WIDTH && pos[1] + j >= 0 \
 				&& pos[1] + j < HEIGHT)
-			mlx_put_pixel(img, pos[0] + i, pos[1] + j, color);
+				mlx_put_pixel(img, pos[0] + i, pos[1] + j, color);
 			j++;
 		}
 		i++;
@@ -63,7 +62,9 @@ void	draw_minimap_border(t_data *data)
 
 uint32_t	get_minimap_color(t_data *data, int x, int y)
 {
-	if (data->map->map[y][x] == WALL)
+	if (!valid_coords(data, x, y))
+		return (0x000000FF);
+	else if (data->map->map[y][x] == WALL)
 		return (data->ceiling_color);
 	else if (data->map->map[y][x] == DOOR)
 		return (0x0000FFFF);
@@ -78,7 +79,8 @@ void	draw_minimap(t_data *data)
 	int		y;
 	int		*pos;
 
-	pos = (int [2]){data->player.pos.x / PIXEL_SIZE, data->player.pos.y / PIXEL_SIZE};
+	pos = (int [2]){data->player.pos.x / PIXEL_SIZE, data->player.pos.y / \
+					PIXEL_SIZE};
 	y = pos[1] - 6;
 	i = 0;
 	while (++y < pos[1] + 5)
@@ -87,12 +89,8 @@ void	draw_minimap(t_data *data)
 		j = 0;
 		while (++x < pos[0] + 5)
 		{
-			if (valid_coords(data, x, y))
-				draw_block_minimap(data->minimap, (int [2]){j * M_SCALE, i * \
+			draw_block_minimap(data->minimap, (int [2]){j * M_SCALE, i * \
 							M_SCALE}, M_SCALE, get_minimap_color(data, x, y));
-			else if (!valid_coords(data, x, y))
-				draw_block_minimap(data->minimap, (int [2]){j * M_SCALE, i * \
-							M_SCALE}, M_SCALE, 0x000000FF);
 			j++;
 		}
 		i++;
