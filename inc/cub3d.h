@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/18 18:50:44 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:23:06 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,17 @@
 
 # define WIDTH 2048
 # define HEIGHT 1024
-# define PIXEL_SIZE 64
+# define PIXEL_SIZE 64.0f
+# define M_SCALE (PIXEL_SIZE / 4.0)
 # define FOV 60
 # define MOVE_SPEED 5.0f
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 341
+# define BONUS 1
 
+# define FLOOR '0'
+# define WALL '1'
+# define DOOR '2'
 
 typedef struct s_coordinates
 {
@@ -78,6 +83,7 @@ typedef struct s_data
 {
 	mlx_t			*mlx;
 	mlx_image_t		*image;
+	mlx_image_t		*minimap;
 	t_map			*map;
 	t_player		player;
 	float			scale;
@@ -102,16 +108,20 @@ void		parse_error(t_data *data, int fd, char *msg);
 /*GRAPHICS*/
 void		render_map(t_data *data);
 void		render_player(t_data *data);
+void		draw_minimap(t_data *data);
 void		reset_image(mlx_image_t *image, mlx_t *mlx, int color);
 float		normalize_angle(float angle);
 void		reset_canvas(t_data *data);
 
-void	draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
+void		draw_block(t_data *data, int coords[2], int size, uint32_t color);
+void		draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
 				t_data *data);
+void		draw_circle(float coords[2], float radius, uint32_t color, mlx_image_t *img);
 
 /*PLAYER*/
 void	dda_algo(t_dda *dda, t_data *data, float angle);
 void		movement(t_data *data);
+bool		wall_collision(t_data *data, const char direction, const char xy);
 
 
 /*HOOKS*/

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   general_hook.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:08:59 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/17 17:46:26 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:57:56 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 void	general_hook(void *param)
 {
@@ -21,4 +21,5 @@ void	general_hook(void *param)
 	reset_image(data->image, data->mlx, 0x000000FF);
 	render_map(data);
 	render_player(data);
+	draw_minimap(data);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/18 18:28:35 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:59:06 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ static bool	init_mlx(t_data *data)
 	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->image)
 		return (false);
+	data->minimap = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->minimap)
+		return (false);
+	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
+	mlx_image_to_window(data->mlx, data->image, 0, 0);
+	mlx_image_to_window(data->mlx, data->minimap, 0, 0);
 	return (true);
 }
 
@@ -51,13 +57,10 @@ int	main(int argc, char **argv)
 		return (ft_printf("Error\nInvalid number of arguments\n"), 1);
 	init_data(&data, &map);
 	parse(&data, argv[1]);
-	// print_data(&data);
 	if (!init_mlx(&data))
 		return (ft_printf("Error\nFailed to initialize MLX\n"), 1); //TODO: handle cleanup
 	render_map(&data);
 	render_player(&data);
-	// printf("scale: %f\n", data.scale);
-	mlx_image_to_window(data.mlx, data.image, 0, 0);
 	mlx_key_hook(data.mlx, &keyhook, (void *)&data);
 	mlx_loop_hook(data.mlx, &general_hook, (void *)&data);
 	mlx_loop(data.mlx);

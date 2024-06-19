@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   render_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/18 18:30:11 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:58:46 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
-void	draw_circle(float x, float y, uint32_t color, t_data *data)
+void	draw_circle(float coords[2], float radius, uint32_t color, mlx_image_t *img)
 {
-	float	radius;
 	float	dist;
 	int		i;
 	int		j;
 
-	radius = PIXEL_SIZE / 8;
 	i = -1;
 	while (++i < PIXEL_SIZE)
 	{
@@ -29,8 +27,8 @@ void	draw_circle(float x, float y, uint32_t color, t_data *data)
 			dist = sqrtf((i - radius) * (i - radius) + (j - radius) * (j
 						- radius));
 			if (dist < radius)
-				mlx_put_pixel(data->image, x + i - radius, y + j - radius,
-					color);
+				mlx_put_pixel(img, coords[0] + i - radius, coords[1] + \
+								j - radius, color);
 		}
 	}
 }
@@ -138,10 +136,11 @@ void	render_player(t_data *data)
 	int		column;
 	t_dda	dda;
 
-	draw_circle(data->player.pos.x, data->player.pos.y, 0xFF0000FF, data);
 	ray_angle = data->player.dir - (FOV / 2) * (M_PI / 180);
 	column = 0;
 	reset_canvas(data);
+	draw_circle((float [2]){data->player.pos.x, data->player.pos.y}, PIXEL_SIZE / \
+				8, 0xFF0000FF, data->image);
 	while (ray_angle <= data->player.dir + ((FOV / 2) * (M_PI / 180)))
 	{
 		dda_algo(&dda, data, normalize_angle(ray_angle));

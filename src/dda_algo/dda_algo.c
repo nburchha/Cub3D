@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:07:05 by psanger           #+#    #+#             */
-/*   Updated: 2024/06/17 20:15:21 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/18 15:24:02 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 float	to_angle(int angle)
 {
@@ -160,7 +160,7 @@ void	dda_algo(t_dda *dda, t_data *data, float angle)
 	// printf("end |%f|, |%f|\n", dda.end_x, dda.end_y);
 	dda->len = pow(pow(dda->delta_x, 2) + pow(dda->delta_y, 2), 0.5);
 
-	// draw_line(data->player.pos, (t_coordinates){dda->end_x * 64, dda->end_y * 64}, 0x0000000FF, data);
+	draw_line(data->player.pos, (t_coordinates){dda.end_x * 64, dda.end_y * 64}, 0x0000000FF, data);
 	// printf("len : |%f|\n", dda.len);
 }
 

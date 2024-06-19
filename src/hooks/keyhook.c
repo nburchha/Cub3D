@@ -6,11 +6,11 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:00:10 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/07 15:38:44 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/17 20:10:18 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 void	keyhook(mlx_key_data_t keydata, void *param)
 {
