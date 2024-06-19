@@ -3,27 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:21:29 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/18 18:15:39 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/19 10:02:06 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	near_player(t_data *data, int x, int y)
+static bool	valid_coords(t_data *data, int x, int y)
 {
-	float	player_x;
-	float	player_y;
-	float	dist;
+	if (x < 0 || y < 0 || x >= data->map->width || y >= data->map->height)
+		return (false);
+	return (true);
+}
 
-	player_x = data->player.pos.x / PIXEL_SIZE;
-	player_y = data->player.pos.y / PIXEL_SIZE;
-	dist = sqrtf((player_x - x) * (player_x - x) + (player_y - y) * (player_y - y));
-	if (dist < 5.0)
-		return (true);
-	return (false);
+static void	draw_block_minimap(mlx_image_t *img, int pos[2], int size, int \
+								color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < size)
+	{
+		
+		j = 0;
+		while (j < size)
+		{
+			if (pos[0] + i >= 0 && pos[0] + i < WIDTH && pos[1] + j >= 0 \
+				&& pos[1] + j < HEIGHT)
+			mlx_put_pixel(img, pos[0] + i, pos[1] + j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_minimap_border(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < M_SCALE * 11)
+	{
+		j = 0;
+		while (j < M_SCALE * 11)
+		{
+			if (i <= M_SCALE || j <= M_SCALE || i >= M_SCALE * 10 || j >= \
+				M_SCALE * 10)
+				mlx_put_pixel(data->minimap, j, i, 0xFFFFFFFF);
+			j++;
+		}
+		i++;
+	}
+}
+
+uint32_t	get_minimap_color(t_data *data, int x, int y)
+{
+	if (data->map->map[y][x] == WALL)
+		return (data->ceiling_color);
+	else if (data->map->map[y][x] == DOOR)
+		return (0x0000FFFF);
+	return (data->floor_color);
 }
 
 void	draw_minimap(t_data *data)
@@ -32,27 +76,28 @@ void	draw_minimap(t_data *data)
 	int		j;
 	int		x;
 	int		y;
+	int		*pos;
 
+	pos = (int [2]){data->player.pos.x / PIXEL_SIZE, data->player.pos.y / PIXEL_SIZE};
+	y = pos[1] - 6;
 	i = 0;
-	x = PIXEL_SIZE;
-	y = PIXEL_SIZE;
-	while (i < data->map->height)
+	while (++y < pos[1] + 5)
 	{
+		x = pos[0] - 6;
 		j = 0;
-		while (j < data->map->width)
+		while (++x < pos[0] + 5)
 		{
-			x = 
-			// x = PIXEL_SIZE * 2 + ((float)j - data->player.pos.x / PIXEL_SIZE) * MINIMAP_SIZE;
-			// y = PIXEL_SIZE * 2 + ((float)i - data->player.pos.y / PIXEL_SIZE) * MINIMAP_SIZE;
-			printf("x: %d, y: %d\n", x, y);
-			if (data->map->map[i][j] == WALL && near_player(data, j, i))
-				draw_block(data, (int [2]){x, y}, MINIMAP_SIZE, data->ceiling_color);
-			else if (data->map->map[i][j] == DOOR && near_player(data, j, i))
-				draw_block(data, (int [2]){x, y}, MINIMAP_SIZE, 0xFF00FFFF);
-			else if (near_player(data, j, i))
-				draw_block(data, (int [2]){x, y}, MINIMAP_SIZE, data->floor_color);
+			if (valid_coords(data, x, y))
+				draw_block_minimap(data->minimap, (int [2]){j * M_SCALE, i * \
+							M_SCALE}, M_SCALE, get_minimap_color(data, x, y));
+			else if (!valid_coords(data, x, y))
+				draw_block_minimap(data->minimap, (int [2]){j * M_SCALE, i * \
+							M_SCALE}, M_SCALE, 0x000000FF);
 			j++;
 		}
 		i++;
 	}
+	draw_circle((float [2]){M_SCALE * 5 + M_SCALE / 2, M_SCALE * 5 + M_SCALE \
+				/ 2}, M_SCALE / 2, 0xFF0000FF, data->minimap);
+	draw_minimap_border(data);
 }
