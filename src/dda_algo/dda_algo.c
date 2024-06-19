@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:07:05 by psanger           #+#    #+#             */
-/*   Updated: 2024/06/17 20:25:45 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/18 15:24:02 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void	dda_algo(t_data *data, float angle)
 	dda.len = pow(pow(dda.delta_x, 2) + pow(dda.delta_y, 2), 0.5);
 
 	draw_line(data->player.pos, (t_coordinates){dda.end_x * 64, dda.end_y * 64}, 0x0000000FF, data);
-	printf("len : |%f|\n", dda.len);
+	// printf("len : |%f|\n", dda.len);
 }
 
 

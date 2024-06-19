@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/17 17:45:35 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/19 09:16:46 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ static bool	init_mlx(t_data *data)
 	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->image)
 		return (false);
+	data->minimap = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->minimap)
+		return (false);
 	return (true);
 }
 
@@ -58,6 +61,7 @@ int	main(int argc, char **argv)
 	render_player(&data);
 	printf("scale: %f\n", data.scale);
 	mlx_image_to_window(data.mlx, data.image, 0, 0);
+	mlx_image_to_window(data.mlx, data.minimap, 0, 0);
 	mlx_key_hook(data.mlx, &keyhook, (void *)&data);
 	mlx_loop_hook(data.mlx, &general_hook, (void *)&data);
 	mlx_loop(data.mlx);
