@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/19 22:43:01 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:05:44 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	render_player(t_data *data)
 	t_dda	dda;
 
 	ray_angle = data->player.dir - (FOV / 2) * (M_PI / 180);
-	column = 0;
+	column = WIDTH;
 	reset_canvas(data);
 	// draw_circle((float [2]){data->player.pos.x, data->player.pos.y}, PIXEL_SIZE / \
 	// 			8, 0xFF0000FF, data->image);
@@ -125,7 +125,7 @@ void	render_player(t_data *data)
 		dda_algo(&dda, data, normalize_angle(ray_angle));
 		cast(data, &dda, column);
 		ray_angle += (FOV) * (M_PI / 180) / WIDTH;
-		column++;
+		column--;
 	}
 	draw_crosshair(data);
 }
