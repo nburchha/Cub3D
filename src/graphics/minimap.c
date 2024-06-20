@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:21:29 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 22:49:45 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/20 14:55:49 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	draw_player(t_data *data)
 {
 	t_coordinates	v[3];
 
-	draw_circle((float [2]){M_SCALE * 5 + M_SCALE / 2, M_SCALE * 5 + M_SCALE \
-				/ 2}, M_SCALE / 2, 0xFF0000FF, data->minimap);
+	// draw_circle((float [2]){M_SCALE * 5 + M_SCALE / 2, M_SCALE * 5 + M_SCALE \
+	// 			/ 2}, M_SCALE / 2, 0xFF0000FF, data->minimap);
 	//calculate vertex of the triangle according to the direction of the player
 	v[0] = (t_coordinates){M_SCALE * 5 + M_SCALE / 2, M_SCALE * 5 + M_SCALE / 2};
 	v[1] = (t_coordinates){v[0].x + cosf(data->player.dir) * M_SCALE / 2, \
@@ -67,7 +67,7 @@ void	draw_player(t_data *data)
 	M_SCALE / 2, v[0].y + sinf(data->player.dir + M_PI / 2) * M_SCALE / 2};
 	// printf("v0: %f %f\nv1: %f %f\nv2: %f %f\n", v[0].x, v[0].y, v[1].x, v[1].y, v[2].x, v[2].y);
 	// draw_line(v[0], v[1], 0xFF0000FF, data->minimap);
-	draw_triangle(data, data->player.dir, 0xFF0000FF);
+	draw_filled_triangle(data->minimap, (t_coordinates){v[0].x, v[0].y}, data->player.dir);
 	// draw_filled_triangle(v[0], v[1], v[2], 0xFF0000FF, data->minimap);
 }
 
