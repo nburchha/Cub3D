@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/21 10:35:06 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/21 16:56:24 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ static void	init_data(t_data *data, t_map *map)
 		data->door_texture = mlx_load_png(DOOR_PATH);
 		if (!data->door_texture)
 			parse_error(data, 2, "Could not load door texture\n");
+		data->deagle_texture = mlx_load_png(DEAGLE_PATH);
+		if (!data->deagle_texture)
+			parse_error(data, 2, "Could not load deagle texture\n");
 	}
 }
 
@@ -48,9 +51,14 @@ static bool	init_mlx(t_data *data)
 	data->minimap = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->minimap)
 		return (false);
+	data->deagle = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->deagle)
+		return (false);
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
 	mlx_image_to_window(data->mlx, data->minimap, 0, 0);
+	data->deagle = mlx_texture_to_image(data->mlx, data->deagle_texture);
+	mlx_image_to_window(data->mlx, data->deagle, WIDTH - 1200, HEIGHT - 648);
 	return (true);
 }
 

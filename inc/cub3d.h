@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/21 09:36:57 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/21 16:55:44 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 341
 # define BONUS 1
-# define DOOR_PATH "textures/oak_door_top.png"
+# define DOOR_PATH "textures/dirt_podzol_side.png"
+# define DEAGLE_PATH "textures/deagle1056x648.png"
 
 # define FLOOR '0'
 # define WALL '1'
@@ -88,6 +89,8 @@ typedef struct s_data
 	mlx_t			*mlx;
 	mlx_image_t		*image;
 	mlx_image_t		*minimap;
+	mlx_image_t		*deagle;
+	mlx_texture_t	*deagle_texture;
 	t_map			*map;
 	t_player		player;
 	float			scale;
