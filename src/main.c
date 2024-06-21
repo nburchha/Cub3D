@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 23:30:34 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/21 10:35:06 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ static void	init_data(t_data *data, t_map *map)
 	data->w_texture = NULL;
 	data->e_texture = NULL;
 	data->map = map;
-	data->door_texture = mlx_load_png("./door.png");
-	if (!data->door_texture)
-		parse_error(data, 2, "error load door png\n");
+	if (BONUS)
+	{
+		data->door_texture = mlx_load_png(DOOR_PATH);
+		if (!data->door_texture)
+			parse_error(data, 2, "Could not load door texture\n");
+	}
 }
 
 static bool	init_mlx(t_data *data)

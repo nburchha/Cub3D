@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:40:27 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/20 01:38:03 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/21 10:44:12 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ static void	door_in_reach(t_data *data)
 			+ pow(dda.door_end_y - dda.start_y, 2), 0.5);
 	if (dda.is_open_door == 2)
 	{
-		if (data->map->map[y][x] == '2' && open_door_len < (float)3)
-			data->map->map[y][x] = '3';
+		if (data->map->map[y][x] == DOOR && open_door_len < (float)3)
+			data->map->map[y][x] = OPEN_DOOR;
 	}
 	if (dda.is_open_door == 3)
 	{
-		if (data->map->map[y][x] == '3' && open_door_len < (float)3)
-			data->map->map[y][x] = '2';
+		if (data->map->map[y][x] == OPEN_DOOR && open_door_len < (float)3)
+			data->map->map[y][x] = DOOR;
 	}
 }
 
