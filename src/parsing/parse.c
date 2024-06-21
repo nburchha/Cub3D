@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:02:04 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/21 10:05:14 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/21 10:10:33 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ check texture paths if they are accessible
 
 void	parse_error(t_data *data, int fd, char *msg)
 {
-	ft_printf("Error\n%s\n", msg);
+	printf("Error\n%s\n", msg);
 	if (fd != -1)
 		close (fd);
 	if (!data)

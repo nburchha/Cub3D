@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/21 10:05:38 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/21 10:10:57 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,32 @@ static bool	init_mlx(t_data *data)
 	return (true);
 }
 
+static void	cleanup(t_data *data)
+{
+	if (data->n_texture)
+		mlx_delete_texture(data->n_texture);
+	if (data->s_texture)
+		mlx_delete_texture(data->s_texture);
+	if (data->w_texture)
+		mlx_delete_texture(data->w_texture);
+	if (data->e_texture)
+		mlx_delete_texture(data->e_texture);
+	if (data->map->map)
+		free_split(data->map->map);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
 	t_map	map;
 
 	if (argc != 2)
-		return (ft_printf("Error\nInvalid number of arguments\n"), 1);
+		return (printf("Error\nInvalid number of arguments\n"), 1);
 	init_data(&data, &map);
 	parse(&data, argv[1]);
 	printf("texture height: %d width: %d\n", data.n_texture->height, data.n_texture->width);
 	if (!init_mlx(&data))
-		return (printf("Error\nFailed to initialize MLX\n"), mlx_terminate(data.mlx), 1); //TODO: handle cleanup
+		return (printf("Error\nFailed to initialize MLX\n"), mlx_terminate(data.mlx), 1);
 	render_map(&data);
 	render_player(&data);
 	mlx_key_hook(data.mlx, &keyhook, (void *)&data);
@@ -67,5 +81,5 @@ int	main(int argc, char **argv)
 	mlx_cursor_hook(data.mlx, &cursor_hook, (void *)&data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
-	return (0); //TODO: handle cleanup
+	return (cleanup(&data), 0);
 }
