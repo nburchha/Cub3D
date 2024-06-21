@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 22:50:46 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/21 09:36:57 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 # define MOVE_SPEED 5.0f
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 341
-# define BONUS 1
 
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
+# define OPENED_DOOR 'd'
 
 typedef struct s_coordinates
 {
@@ -43,7 +43,6 @@ typedef struct s_coordinates
 
 typedef struct s_dda
 {
-	// char			**map;
 	float			angle;
 
 	float			start_x;
@@ -129,6 +128,7 @@ bool		wall_collision(t_data *data, const char direction, const char xy);
 /*HOOKS*/
 void		keyhook(mlx_key_data_t keydata, void *param);
 void		general_hook(void *param);
+void		cursor_hook(double x, double y, void *param);
 
 /*DEBUG*/
 void		print_data(t_data *data);

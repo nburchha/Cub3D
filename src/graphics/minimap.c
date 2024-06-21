@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:21:29 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 22:49:45 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/21 09:36:37 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ uint32_t	get_minimap_color(t_data *data, int x, int y)
 		return (0x000000FF);
 	else if (data->map->map[y][x] == WALL)
 		return (data->ceiling_color);
-	else if (data->map->map[y][x] == DOOR)
-		return (0x0000FFFF);
+	else if (data->map->map[y][x] == DOOR || data->map->map[y][x] == OPENED_DOOR)
+		return (0xFF00FFFF);
 	return (data->floor_color);
 }
 

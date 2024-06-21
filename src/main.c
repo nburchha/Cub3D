@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 22:04:36 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/21 09:32:20 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int argc, char **argv)
 	render_player(&data);
 	mlx_key_hook(data.mlx, &keyhook, (void *)&data);
 	mlx_loop_hook(data.mlx, &general_hook, (void *)&data);
+	mlx_cursor_hook(data.mlx, &cursor_hook, (void *)&data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	return (0); //TODO: handle cleanup
