@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/21 09:32:31 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/21 09:36:57 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
+# define OPENED_DOOR 'd'
 
 typedef struct s_coordinates
 {
