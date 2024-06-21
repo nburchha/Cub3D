@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:02:04 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/17 20:25:45 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/21 10:05:14 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	parse_error(t_data *data, int fd, char *msg)
 		mlx_delete_texture(data->w_texture);
 	if (data->e_texture)
 		mlx_delete_texture(data->e_texture);
+	if (data->map->map)
+		free_split(data->map->map);
 	exit(1);
 }
 
@@ -69,6 +71,8 @@ void	parse(t_data *data, char *path)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (line)
+		free(line);
 	if (c_count < 2 || t_count < 4 || !line)
 		parse_error(data, fd, "Not all requirements met inside .cub file");
 	parse_map(data, path, fd);

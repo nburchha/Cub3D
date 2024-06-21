@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/21 09:32:20 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/21 10:05:38 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	main(int argc, char **argv)
 	parse(&data, argv[1]);
 	printf("texture height: %d width: %d\n", data.n_texture->height, data.n_texture->width);
 	if (!init_mlx(&data))
-		return (ft_printf("Error\nFailed to initialize MLX\n"), 1); //TODO: handle cleanup
+		return (printf("Error\nFailed to initialize MLX\n"), mlx_terminate(data.mlx), 1); //TODO: handle cleanup
 	render_map(&data);
 	render_player(&data);
 	mlx_key_hook(data.mlx, &keyhook, (void *)&data);
