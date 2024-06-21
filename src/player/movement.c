@@ -12,19 +12,6 @@
 
 #include "cub3d.h"
 
-static void	mouse_movement(t_data *data)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	mlx_get_mouse_pos(data->mlx, &x, &y);
-	data->player.dir += ((x - WIDTH / 2) * ROTATE_SPEED) * (M_PI / 180);
-	data->player.dir = normalize_angle(data->player.dir);
-	mlx_set_mouse_pos(data->mlx, WIDTH / 2, HEIGHT / 2);
-}
-
 static void	door_in_reach(t_data *data)
 {
 	t_dda	dda;
@@ -83,8 +70,6 @@ static void	movement_wasd(t_data *data)
 void	movement(t_data *data)
 {
 	movement_wasd(data);
-	if (BONUS)
-		mouse_movement(data);
 	if (data->keys[MLX_KEY_LEFT])
 		data->player.dir -= ROTATE_SPEED;
 	if (data->keys[MLX_KEY_RIGHT])
