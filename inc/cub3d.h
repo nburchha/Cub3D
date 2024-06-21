@@ -29,11 +29,13 @@
 # define MOVE_SPEED 5.0f
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 341
+# define BONUS 1
+# define DOOR_PATH "textures/oak_door_top.png"
 
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
-# define OPENED_DOOR 'd'
+# define OPEN_DOOR '3'
 
 typedef struct s_coordinates
 {
@@ -62,6 +64,9 @@ typedef struct s_dda
 	char			wall_face;
 	int				texture;
 
+	int				is_open_door;
+	float			door_end_x;
+	float			door_end_y;
 }				t_dda;
 
 typedef struct s_map
@@ -93,6 +98,7 @@ typedef struct s_data
 	mlx_texture_t	*s_texture;
 	mlx_texture_t	*w_texture;
 	mlx_texture_t	*e_texture;
+	mlx_texture_t	*door_texture;
 }	t_data;
 
 /*PARSING*/
@@ -120,7 +126,7 @@ void		draw_triangle(t_data *data, float direction, uint32_t color);
 bool		valid_coords(t_data *data, int x, int y);
 
 /*PLAYER*/
-void	dda_algo(t_dda *dda, t_data *data, float angle);
+void		dda_algo(t_dda *dda, t_data *data, float angle);
 void		movement(t_data *data);
 bool		wall_collision(t_data *data, const char direction, const char xy);
 

@@ -77,8 +77,10 @@ uint32_t	get_minimap_color(t_data *data, int x, int y)
 		return (0x000000FF);
 	else if (data->map->map[y][x] == WALL)
 		return (data->ceiling_color);
-	else if (data->map->map[y][x] == DOOR || data->map->map[y][x] == OPENED_DOOR)
+	else if (data->map->map[y][x] == DOOR)
 		return (0xFF00FFFF);
+	else if (data->map->map[y][x] == OPEN_DOOR)
+		return (0xAA00AAFF);
 	return (data->floor_color);
 }
 

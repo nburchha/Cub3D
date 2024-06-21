@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/21 10:10:57 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/21 10:35:06 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ static void	init_data(t_data *data, t_map *map)
 	data->w_texture = NULL;
 	data->e_texture = NULL;
 	data->map = map;
+	if (BONUS)
+	{
+		data->door_texture = mlx_load_png(DOOR_PATH);
+		if (!data->door_texture)
+			parse_error(data, 2, "Could not load door texture\n");
+	}
 }
 
 static bool	init_mlx(t_data *data)
@@ -71,7 +77,7 @@ int	main(int argc, char **argv)
 		return (printf("Error\nInvalid number of arguments\n"), 1);
 	init_data(&data, &map);
 	parse(&data, argv[1]);
-	printf("texture height: %d width: %d\n", data.n_texture->height, data.n_texture->width);
+	// printf("texture height: %d width: %d\n", data.n_texture->height, data.n_texture->width);
 	if (!init_mlx(&data))
 		return (printf("Error\nFailed to initialize MLX\n"), mlx_terminate(data.mlx), 1);
 	render_map(&data);
