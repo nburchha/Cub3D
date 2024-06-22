@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:16:52 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/22 19:41:16 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/22 19:52:08 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static bool	convert_to_int(char **rgb_char, uint32_t *color)
 		if (rgb[i] < 0 || rgb[i] > 255)
 			return (false);
 	}
-	if (i != 3)
+	if (i != 3 || *color != 0)
 		return (false);
 	*color = ((uint32_t)rgb[0] << 24 | (uint32_t)rgb[1] << 16 | \
 			(uint32_t)rgb[2] << 8 | 0xFF);
