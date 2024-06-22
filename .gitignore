@@ -2,6 +2,5 @@
 *.o
 *.out
 cub3d
-*.png
 *.cub
 .DS_Store

@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:48:48 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/19 20:02:21 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/22 15:52:14 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ bool	valid_coords(t_data *data, int x, int y)
 	return (true);
 }
 
-void	reset_image(mlx_image_t *image, mlx_t *mlx, int color)
+void	reset_image(mlx_image_t *image, int color)
 {
-	int	x;
-	int	y;
+	uint32_t	x;
+	uint32_t	y;
 
 	y = -1;
-	while (++y < mlx->height)
+	while (++y < image->height)
 	{
 		x = -1;
-		while (++x < mlx->width)
+		while (++x < image->width)
 			mlx_put_pixel(image, x, y, color);
 	}
 }
