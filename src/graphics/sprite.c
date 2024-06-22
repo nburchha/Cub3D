@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 15:01:22 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/22 17:42:49 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/22 19:23:39 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static bool	wasd_pressed(t_data *data)
 	return (false);
 }
 
-static void	draw_overlay(t_data *data, mlx_image_t *img, uint32_t x_offset, uint32_t y_offset)
+static void	draw_overlay(t_data *data, mlx_image_t *img, uint32_t x_offset, \
+						uint32_t y_offset)
 {
 	uint32_t	i;
 	uint32_t	j;
@@ -31,13 +32,11 @@ static void	draw_overlay(t_data *data, mlx_image_t *img, uint32_t x_offset, uint
 		j = -1;
 		while (++j < img->width)
 		{
-			// if (i == 0 || i == img->height - 1 || j == 0 || j == img->width - 1)
-			// 	mlx_put_pixel(img, j, i, 0xFF0000FF);
-			if (get_color_texture(data->sprite_texture, j, i) != 0x00000000 && i + y_offset >= 0 && i + y_offset < img->height && j + x_offset >= 0 && j + x_offset < img->width)
+			if (get_color_texture(data->sprite_texture, j, i) != 0x00000000 && \
+				i + y_offset >= 0 && i + y_offset < img->height && j + x_offset \
+				>= 0 && j + x_offset < img->width)
 				mlx_put_pixel(img, j + x_offset, i + y_offset, \
 				get_color_texture(data->sprite_texture, j, i));
-			// mlx_put_pixel(img, j + x_offset, i, \
-			// get_color_texture(data->sprite_texture, j, i));
 		}
 	}
 }
@@ -50,7 +49,8 @@ void	animate_sprite(t_data *data, mlx_image_t *img)
 	reset_image(img, 0x00000000);
 	if (offset <= 0 || offset >= 60)
 		sign = -sign;
-	if (data->keys[MLX_KEY_LEFT_SHIFT] && wasd_pressed(data) && offset > 2 && offset < 58)
+	if (data->keys[MLX_KEY_LEFT_SHIFT] && wasd_pressed(data) && offset > 2 && \
+		offset < 58)
 		offset += sign;
 	if (wasd_pressed(data))
 		offset += sign;
