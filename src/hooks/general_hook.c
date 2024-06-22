@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:08:59 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/19 17:57:56 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/22 16:34:09 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	general_hook(void *param)
 
 	data = (t_data *)param;
 	movement(data);
-	reset_image(data->image, data->mlx, 0x000000FF);
+	reset_image(data->image, 0x000000FF);
 	render_map(data);
 	render_player(data);
 	draw_minimap(data);
+	animate_sprite(data, data->deagle);
 }

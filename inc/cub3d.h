@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/21 16:55:44 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/22 16:00:10 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define MAX_KEY 341
 # define BONUS 1
 # define DOOR_PATH "textures/dirt_podzol_side.png"
-# define DEAGLE_PATH "textures/deagle1056x648.png"
+# define SPRITE_PATH "textures/deagle1056x648.png"
 
 # define FLOOR '0'
 # define WALL '1'
@@ -90,7 +90,7 @@ typedef struct s_data
 	mlx_image_t		*image;
 	mlx_image_t		*minimap;
 	mlx_image_t		*deagle;
-	mlx_texture_t	*deagle_texture;
+	mlx_texture_t	*sprite_texture;
 	t_map			*map;
 	t_player		player;
 	float			scale;
@@ -117,7 +117,8 @@ void		parse_error(t_data *data, int fd, char *msg);
 void		render_map(t_data *data);
 void		render_player(t_data *data);
 void		draw_minimap(t_data *data);
-void		reset_image(mlx_image_t *image, mlx_t *mlx, int color);
+void		animate_sprite(t_data *data, mlx_image_t *img);
+void		reset_image(mlx_image_t *image, int color);
 float		normalize_angle(float angle);
 void		reset_canvas(t_data *data);
 
@@ -127,6 +128,7 @@ void		draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
 void		draw_circle(float coords[2], float radius, uint32_t color, mlx_image_t *img);
 void		draw_triangle(t_data *data, float direction, uint32_t color);
 bool		valid_coords(t_data *data, int x, int y);
+int			get_color_texture(mlx_texture_t *texture, int x, int y);
 
 /*PLAYER*/
 void		dda_algo(t_dda *dda, t_data *data, float angle);

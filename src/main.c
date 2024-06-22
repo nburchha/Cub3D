@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/21 16:56:24 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/22 17:11:36 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	init_data(t_data *data, t_map *map)
 		data->door_texture = mlx_load_png(DOOR_PATH);
 		if (!data->door_texture)
 			parse_error(data, 2, "Could not load door texture\n");
-		data->deagle_texture = mlx_load_png(DEAGLE_PATH);
-		if (!data->deagle_texture)
+		data->sprite_texture = mlx_load_png(SPRITE_PATH);
+		if (!data->sprite_texture)
 			parse_error(data, 2, "Could not load deagle texture\n");
 	}
 }
@@ -57,8 +57,8 @@ static bool	init_mlx(t_data *data)
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
 	mlx_image_to_window(data->mlx, data->minimap, 0, 0);
-	data->deagle = mlx_texture_to_image(data->mlx, data->deagle_texture);
-	mlx_image_to_window(data->mlx, data->deagle, WIDTH - 1200, HEIGHT - 648);
+	data->deagle = mlx_texture_to_image(data->mlx, data->sprite_texture);
+	mlx_image_to_window(data->mlx, data->deagle, WIDTH - 1000, HEIGHT - 648);
 	return (true);
 }
 
@@ -85,7 +85,6 @@ int	main(int argc, char **argv)
 		return (printf("Error\nInvalid number of arguments\n"), 1);
 	init_data(&data, &map);
 	parse(&data, argv[1]);
-	// printf("texture height: %d width: %d\n", data.n_texture->height, data.n_texture->width);
 	if (!init_mlx(&data))
 		return (printf("Error\nFailed to initialize MLX\n"), mlx_terminate(data.mlx), 1);
 	render_map(&data);
