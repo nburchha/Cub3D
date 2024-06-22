@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:02:04 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/21 10:10:33 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/22 19:41:20 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ void	parse(t_data *data, char *path)
 			break ;
 		if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		parse_color(data, fd, line, &c_count);
-		parse_texture(data, fd, line, &t_count);
+		if (!parse_color(data, fd, line, &c_count) && \
+			!parse_texture(data, fd, line, &t_count) && line[0] != '\0')
+			parse_error(data, fd, "Could not parse texture or color");
 		free(line);
 		line = get_next_line(fd);
 	}

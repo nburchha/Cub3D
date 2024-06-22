@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/22 16:00:10 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/22 19:33:14 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ typedef struct s_data
 
 /*PARSING*/
 void		parse(t_data *data, char *path);
-void		parse_texture(t_data *data, int fd, char *line, int *t_count);
-void		parse_color(t_data *data, int fd, char *line, int *c_count);
+bool		parse_texture(t_data *data, int fd, char *line, int *t_count);
+bool		parse_color(t_data *data, int fd, char *line, int *c_count);
 void		parse_map(t_data *data, char *path, int fd);
 bool		check_map(t_data *data);
 bool		allocate_map(t_data *data, char ***allocate_to);

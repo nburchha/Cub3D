@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:16:52 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/17 20:25:45 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/22 19:41:16 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ static bool	extract_color(t_data *data, char *line)
 	return (true);
 }
 
-void	parse_color(t_data *data, int fd, char *line, int *c_count)
+bool	parse_color(t_data *data, int fd, char *line, int *c_count)
 {
 	if (ft_strncmp(line, "C ", 2) == 0 || ft_strncmp(line, "F ", 2) == 0)
 	{
 		if (!extract_color(data, line))
 			parse_error(data, fd, "Could not extract color");
 		(*c_count)++;
+		return (true);
 	}
+	return (false);
 }
