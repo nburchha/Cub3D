@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 22:04:36 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/26 15:19:15 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	init_data(t_data *data, t_map *map)
 {
 	int	i;
+	t_minimap_p mini;
 
 	i = -1;
 	while (++i < MAX_KEY)
@@ -29,6 +30,8 @@ static void	init_data(t_data *data, t_map *map)
 	data->w_texture = NULL;
 	data->e_texture = NULL;
 	data->map = map;
+	init_minimap_player(&mini);
+	data->minimap_player = mini;
 }
 
 static bool	init_mlx(t_data *data)

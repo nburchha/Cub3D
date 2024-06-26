@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/20 14:55:33 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/26 15:34:31 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,21 @@ typedef struct s_dda
 
 }				t_dda;
 
+typedef struct s_minimap_player
+{
+	int				height;
+	int				width;
+	int				size;
+	t_coordinates	top;
+	t_coordinates	left;
+	t_coordinates	right;
+	t_coordinates	p;
+	int				start_x;
+	int				start_y;
+	int				i;
+	int				j;
+}	t_minimap_p;
+
 typedef struct s_map
 {
 	int				width;
@@ -94,7 +109,11 @@ typedef struct s_data
 	mlx_texture_t	*s_texture;
 	mlx_texture_t	*w_texture;
 	mlx_texture_t	*e_texture;
+	t_minimap_p		minimap_player;
 }	t_data;
+
+/*INIT*/
+void	init_minimap_player(t_minimap_p *mini);
 
 /*PARSING*/
 void		parse(t_data *data, char *path);
@@ -120,6 +139,7 @@ void		draw_circle(float coords[2], float radius, uint32_t color, mlx_image_t *im
 void		draw_triangle(t_data *data, float direction, uint32_t color);
 bool		valid_coords(t_data *data, int x, int y);
 void		draw_filled_triangle(mlx_image_t *img, t_coordinates pos, float direction);
+void		draw_player(t_data *data);
 
 /*PLAYER*/
 void	dda_algo(t_dda *dda, t_data *data, float angle);

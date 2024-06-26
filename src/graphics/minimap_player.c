@@ -3,42 +3,114 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:07:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/20 15:00:16 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/26 15:34:54 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_filled_triangle(mlx_image_t *img, t_coordinates pos, float direction)
+bool	is_point_in_triangle(t_coordinates p, t_coordinates a, t_coordinates b,
+		t_coordinates c)
+{
+	float	denominator;
+	float	alpha;
+	float	beta;
+	float	gamma;
+
+	denominator = ((b.y - c.y) * (a.x - c.x) + (c.x - b.x) * (a.y - c.y));
+	alpha = ((b.y - c.y) * (p.x - c.x) + (c.x - b.x) * (p.y - c.y))
+		/ denominator;
+	beta = ((c.y - a.y) * (p.x - c.x) + (a.x - c.x) * (p.y - c.y))
+		/ denominator;
+	gamma = 1.0 - alpha - beta;
+	return ((alpha > 0) && (beta > 0) && (gamma > 0));
+}
+
+void	get_pos_angle(float *x, float *y, t_data *data)
+{
+	float	delta_x;
+	float	delta_y;
+	float	len;
+	float	angle_norm;
+
+	delta_x = *x - (float)data->minimap_player.start_x;
+	delta_y = *y - (float)data->minimap_player.start_y;
+	len = pow(pow(delta_x, 2) + pow(delta_y, 2), 0.5);
+	angle_norm = atan2(delta_x, delta_y);
+	*x = cos(data->player.dir + angle_norm) * len
+		+ (float)data->minimap_player.start_x;
+	*y = sin(data->player.dir + angle_norm) * len
+		+ (float)data->minimap_player.start_y;
+}
+
+void	init_minimap_player(t_minimap_p *mini)
+{
+	mini->height = 18;
+	mini->width = mini->height / 2;
+	mini->size = mini->height;
+	if (mini->height < mini->width)
+		mini->size = mini->width;
+	mini->size += 2;
+	mini->start_x = 88;
+	mini->start_y = 88;
+	mini->top.x = 0;
+	mini->top.y = 0;
+	mini->left.x = 0;
+	mini->left.y = 0;
+	mini->right.x = 0;
+	mini->right.y = 0;
+	mini->p.x = 0;
+	mini->p.y = 0;
+}
+
+void	adjust_corner_pos(t_data *data)
+{
+	data->minimap_player.top.x = data->minimap_player.start_x;
+	data->minimap_player.top.y = data->minimap_player.start_y
+		- data->minimap_player.height / 2;
+	get_pos_angle(&data->minimap_player.top.x, &data->minimap_player.top.y,
+		data);
+	data->minimap_player.left.x = data->minimap_player.start_x
+		- data->minimap_player.width / 2;
+	data->minimap_player.left.y = data->minimap_player.start_y
+		+ data->minimap_player.height / 2;
+	get_pos_angle(&data->minimap_player.left.x, &data->minimap_player.left.y,
+		data);
+	data->minimap_player.right.x = data->minimap_player.start_x
+		+ data->minimap_player.width / 2;
+	data->minimap_player.right.y = data->minimap_player.start_y
+		+ data->minimap_player.height / 2;
+	get_pos_angle(&data->minimap_player.right.x, &data->minimap_player.right.y,
+		data);
+}
+
+void	draw_player(t_data *data)
 {
 	int	i;
 	int	j;
-	int	line_len;
 
-	i = 0;
-	line_len = 0;
-	pos.x = M_SCALE * 5;// + M_SCALE / 2;
-	pos.y = M_SCALE * 5;// + M_SCALE / 2;
-	int center_x = pos.x + M_SCALE / 2;
-	int center_y = pos.y + M_SCALE / 2;
-	direction = normalize_angle(-direction);
-	draw_circle((float [2]){center_x, center_y}, M_SCALE / 8, 0xFFFFFFFF, img);
-	while (i < M_SCALE * 2)
+	adjust_corner_pos(data);
+	i = data->minimap_player.start_y - data->minimap_player.size;
+	j = data->minimap_player.start_x - data->minimap_player.size;
+	while (i < data->minimap_player.start_y + data->minimap_player.size)
 	{
-		if (i % 2 == 0)
-			line_len++;
-		j = line_len;
-		while (j < M_SCALE - line_len)
+		j = data->minimap_player.start_x - data->minimap_player.size;
+		while (j < data->minimap_player.start_x + data->minimap_player.size)
 		{
-			int rotated_x = (int)(center_x + (pos.x - center_x + j) * cos(direction) - (pos.y - center_y + i) * sin(direction));
-			int rotated_y = (int)(center_y + (pos.x - center_x + j) * sin(direction) + (pos.y - center_y + i) * cos(direction));
-			mlx_put_pixel(img, rotated_x, rotated_y, 0xFF0000FF);
+			data->minimap_player.p.x = j;
+			data->minimap_player.p.y = i;
+			if (is_point_in_triangle(data->minimap_player.p,
+					data->minimap_player.top, data->minimap_player.left,
+					data->minimap_player.right))
+			{
+				if (i < HEIGHT && i > 0 && j < WIDTH && j > 0)
+					mlx_put_pixel(data->minimap, j, i, 0xFF0000FF);
+			}
 			j++;
 		}
 		i++;
 	}
-	(void)direction;
 }
