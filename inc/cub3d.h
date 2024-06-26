@@ -6,7 +6,7 @@
 /*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 17:17:34 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/26 17:49:53 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ bool		allocate_map(t_data *data, char ***allocate_to);
 void		parse_error(t_data *data, int fd, char *msg);
 
 /*GRAPHICS*/
+void		cast_projection(t_data *data, t_dda *dda, int column);
+
 void		render_map(t_data *data);
 void		render_player(t_data *data);
 void		draw_minimap(t_data *data);
@@ -168,5 +170,8 @@ void		cursor_hook(double x, double y, void *param);
 
 /*DEBUG*/
 void		print_data(t_data *data);
+
+/*HELPER*/
+float		to_rad(int angle);
 
 #endif
