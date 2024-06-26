@@ -6,7 +6,7 @@
 /*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/20 19:05:44 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/26 17:37:14 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	get_color(t_data *data, t_dda *dda, int y_pixel, int height)
 	pixel_size = 0;
 	x = 0;
 	y = 0;
-
 	if (dda->wall_face == 'N')
 		pixel_size = data->n_texture->width;
 	if (dda->wall_face == 'O')
@@ -50,10 +49,8 @@ int	get_color(t_data *data, t_dda *dda, int y_pixel, int height)
 		pixel_size = data->s_texture->width;
 	if (dda->wall_face == 'W')
 		pixel_size = data->w_texture->width;
-
 	if (dda->texture == 2)
 		pixel_size = data->door_texture->width;
-
 	if (dda->wall_face == 'N' || dda->wall_face == 'S')
 		x = (dda->end_x - (int)dda->end_x) * pixel_size;
 	if (dda->wall_face == 'O' || dda->wall_face == 'W')
@@ -78,8 +75,7 @@ void	cast(t_data *data, t_dda *dda, int column)
 	float	real_len;
 	float	height;
 	float	real_height;
-	int		color;
-	int		mid;
+	int		y_pixel;
 
 	real_len = fabs(cos(to_rad((float)((((float)FOV * (-1)) / 2) + (((float)FOV
 								/ (float)WIDTH) * (float)column)))) * dda->len);
@@ -87,31 +83,39 @@ void	cast(t_data *data, t_dda *dda, int column)
 	real_height = height;
 	if (height > HEIGHT)
 		height = HEIGHT;
-	color = 0;
-	mid = HEIGHT / 2;
-	for (int y_pixel = mid - height / 2; y_pixel < mid + height / 2; y_pixel++)
+	y_pixel = HEIGHT / 2 - height / 2;
+	while (y_pixel < HEIGHT / 2 + height / 2)
 	{
 		if (y_pixel < HEIGHT && y_pixel > 0)
-		{
-			color = get_color(data, dda, y_pixel, real_height);
-			mlx_put_pixel(data->image, column, y_pixel, color);
-		}
+			mlx_put_pixel(data->image, column, y_pixel,
+				get_color(data, dda, y_pixel, real_height));
+		y_pixel++;
 	}
 }
 
 void	draw_crosshair(t_data *data)
 {
-	int	i, j;
+	int	i;
+	int	j;
 
-	for (i = -1; i <= 1; i++)
+	i = -1;
+	j = 0;
+	while (i <= 1)
 	{
-		for (j = 0; j < 10; j++)
+		j = 0;
+		while (j < 10)
 		{
-			mlx_put_pixel(data->image, WIDTH / 2 + i, HEIGHT / 2 + j, 0x000000FF);
-			mlx_put_pixel(data->image, WIDTH / 2 + i, HEIGHT / 2 - j, 0x000000FF);
-			mlx_put_pixel(data->image, WIDTH / 2 + j, HEIGHT / 2 + i, 0x000000FF);
-			mlx_put_pixel(data->image, WIDTH / 2 - j, HEIGHT / 2 + i, 0x000000FF);
+			mlx_put_pixel(data->image, WIDTH / 2 + i, HEIGHT / 2 + j,
+				0x000000FF);
+			mlx_put_pixel(data->image, WIDTH / 2 + i, HEIGHT / 2 - j,
+				0x000000FF);
+			mlx_put_pixel(data->image, WIDTH / 2 + j, HEIGHT / 2 + i,
+				0x000000FF);
+			mlx_put_pixel(data->image, WIDTH / 2 - j, HEIGHT / 2 + i,
+				0x000000FF);
+			j++;
 		}
+		i++;
 	}
 }
 

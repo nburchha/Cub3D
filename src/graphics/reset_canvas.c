@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset_canvas.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 19:08:05 by psanger           #+#    #+#             */
-/*   Updated: 2024/06/22 19:54:45 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:28:58 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ void	reset_canvas(t_data *data)
 		y++;
 	}
 }
-

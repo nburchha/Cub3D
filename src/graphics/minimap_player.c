@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:07:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 16:24:11 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:27:33 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	get_pos_angle(float *x, float *y, t_data *data)
 	angle_norm = atan2(delta_x, delta_y);
 	*x = cos(-data->player.dir + M_PI + angle_norm) * len
 		+ (float)data->minimap_player.start_x;
-	*y = sin(-data->player.dir + M_PI+ angle_norm) * len
+	*y = sin(-data->player.dir + M_PI + angle_norm) * len
 		+ (float)data->minimap_player.start_y;
 }
 
