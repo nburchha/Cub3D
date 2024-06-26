@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:44:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/17 20:25:45 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/22 20:54:37 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	get_map_size(char *path, t_map *map)
 		free(line);
 		line = get_next_line(fd);
 	}
-	while (line && ft_strlen(line) > 1)
+	while (line && (ft_strlen(line) > 1 || line[0] != '\n'))
 	{
 		if (ft_strlen(line) - 1 > map->width)
 			map->width = ft_strlen(line) - 1;
@@ -35,7 +35,7 @@ static bool	get_map_size(char *path, t_map *map)
 		line = get_next_line(fd);
 	}
 	if (line)
-		free(line);
+		return (free(line), false);
 	return (true);
 }
 
@@ -61,7 +61,18 @@ bool	allocate_map(t_data *data, char ***allocate_to)
 	return (true);
 }
 
-static void	copy_map_from_file(t_map *map, int fd)
+static bool	valid_chars(char *line)
+{
+	int	i;
+
+	i = -1;
+	while (line[++i])
+		if (ft_strchr(" 012NSWE", line[i]) == NULL)
+			return (false);
+	return (true);
+}
+
+static bool	copy_map_from_file(t_map *map, int fd)
 {
 	int		i;
 	char	*line;
@@ -77,21 +88,25 @@ static void	copy_map_from_file(t_map *map, int fd)
 	{
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
+		if (!valid_chars(line))
+			return (free(line), false);
 		ft_strlcpy(map->map[i], line, ft_strlen(line) + 1);
 		if (ft_strlen(line) < map->width)
 			map->map[i][ft_strlen(line)] = ' ';
 		free(line);
 		line = get_next_line(fd);
 	}
+	return (true);
 }
 
 void	parse_map(t_data *data, char *path, int fd)
 {
 	if (!get_map_size(path, data->map))
-		parse_error(data, fd, "Open failed");
+		parse_error(data, fd, "Could not get map size");
 	if (!allocate_map(data, &data->map->map))
 		parse_error(data, fd, "Malloc failed");
-	copy_map_from_file(data->map, fd);
+	if (!copy_map_from_file(data->map, fd))
+		parse_error(data, fd, "Could not copy map from file");
 	if (!check_map(data))
 		parse_error(data, fd, "The map doesnt fulfill all criteria");
 }

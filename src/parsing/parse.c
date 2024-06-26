@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:02:04 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/17 20:25:45 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/22 19:41:20 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ check texture paths if they are accessible
 
 void	parse_error(t_data *data, int fd, char *msg)
 {
-	ft_printf("Error\n%s\n", msg);
+	printf("Error\n%s\n", msg);
 	if (fd != -1)
 		close (fd);
 	if (!data)
@@ -32,6 +32,8 @@ void	parse_error(t_data *data, int fd, char *msg)
 		mlx_delete_texture(data->w_texture);
 	if (data->e_texture)
 		mlx_delete_texture(data->e_texture);
+	if (data->map->map)
+		free_split(data->map->map);
 	exit(1);
 }
 
@@ -64,11 +66,14 @@ void	parse(t_data *data, char *path)
 			break ;
 		if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		parse_color(data, fd, line, &c_count);
-		parse_texture(data, fd, line, &t_count);
+		if (!parse_color(data, fd, line, &c_count) && \
+			!parse_texture(data, fd, line, &t_count) && line[0] != '\0')
+			parse_error(data, fd, "Could not parse texture or color");
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (line)
+		free(line);
 	if (c_count < 2 || t_count < 4 || !line)
 		parse_error(data, fd, "Not all requirements met inside .cub file");
 	parse_map(data, path, fd);

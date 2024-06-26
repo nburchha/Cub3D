@@ -50,12 +50,18 @@ int	get_color(t_data *data, t_dda *dda, int y_pixel, int height)
 		pixel_size = data->s_texture->width;
 	if (dda->wall_face == 'W')
 		pixel_size = data->w_texture->width;
+
+	if (dda->texture == 2)
+		pixel_size = data->door_texture->width;
+
 	if (dda->wall_face == 'N' || dda->wall_face == 'S')
 		x = (dda->end_x - (int)dda->end_x) * pixel_size;
 	if (dda->wall_face == 'O' || dda->wall_face == 'W')
 		x = (dda->end_y - (int)dda->end_y) * pixel_size;
 	y = ((float)y_pixel - (HEIGHT / 2 - (float)height / 2)) / (float)height
 		* pixel_size;
+	if (dda->texture == 2)
+		return (get_color_texture(data->door_texture, (int)x, (int)y));
 	if (dda->wall_face == 'N')
 		return (get_color_texture(data->n_texture, (int)x, (int)y));
 	if (dda->wall_face == 'O')
@@ -118,8 +124,6 @@ void	render_player(t_data *data)
 	ray_angle = data->player.dir - (FOV / 2) * (M_PI / 180);
 	column = WIDTH;
 	reset_canvas(data);
-	// draw_circle((float [2]){data->player.pos.x, data->player.pos.y}, PIXEL_SIZE / \
-	// 			8, 0xFF0000FF, data->image);
 	while (ray_angle <= data->player.dir + ((FOV / 2) * (M_PI / 180)))
 	{
 		dda_algo(&dda, data, normalize_angle(ray_angle));

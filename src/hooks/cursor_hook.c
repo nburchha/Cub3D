@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general_hook.c                                     :+:      :+:    :+:   */
+/*   cursor_hook.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 11:08:59 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/22 16:34:09 by nburchha         ###   ########.fr       */
+/*   Created: 2024/06/21 09:25:20 by niklasburch       #+#    #+#             */
+/*   Updated: 2024/06/21 09:29:25 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	general_hook(void *param)
+void	cursor_hook(double xpos, double ypos, void *param)
 {
 	t_data	*data;
 
 	data = (t_data *)param;
-	movement(data);
-	reset_image(data->image, 0x000000FF);
-	render_map(data);
-	render_player(data);
-	draw_minimap(data);
-	animate_sprite(data, data->deagle);
+	data->player.dir += ((xpos - WIDTH / 2) * ROTATE_SPEED) * (M_PI / 180);
+	data->player.dir = normalize_angle(data->player.dir);
+	mlx_set_mouse_pos(data->mlx, WIDTH / 2, HEIGHT / 2);
+	(void)ypos;
 }

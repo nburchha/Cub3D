@@ -1,5 +1,5 @@
 CC = cc
-NAME = cub3d
+NAME = cub3D
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
 INCLUDE_DIR = inc
@@ -25,7 +25,7 @@ SRC = main.c parse.c texture.c map.c \
 color.c check_map.c render_map.c \
 util.c keyhook.c printing.c render_player.c \
 general_hook.c movement.c dda_algo.c \
-minimap.c wall_collision.c reset_canvas.c draw.c minimap_player.c
+minimap.c wall_collision.c reset_canvas.c draw.c minimap_player.c cursor_hook.c sprite.c
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

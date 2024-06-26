@@ -30,10 +30,13 @@
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 341
 # define BONUS 1
+# define DOOR_PATH "textures/dirt_podzol_side.png"
+# define SPRITE_PATH "textures/deagle1056x648.png"
 
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
+# define OPEN_DOOR '3'
 
 typedef struct s_coordinates
 {
@@ -43,7 +46,6 @@ typedef struct s_coordinates
 
 typedef struct s_dda
 {
-	// char			**map;
 	float			angle;
 
 	float			start_x;
@@ -63,6 +65,9 @@ typedef struct s_dda
 	char			wall_face;
 	int				texture;
 
+	int				is_open_door;
+	float			door_end_x;
+	float			door_end_y;
 }				t_dda;
 
 typedef struct s_minimap_player
@@ -99,6 +104,8 @@ typedef struct s_data
 	mlx_t			*mlx;
 	mlx_image_t		*image;
 	mlx_image_t		*minimap;
+	mlx_image_t		*deagle;
+	mlx_texture_t	*sprite_texture;
 	t_map			*map;
 	t_player		player;
 	float			scale;
@@ -110,6 +117,7 @@ typedef struct s_data
 	mlx_texture_t	*w_texture;
 	mlx_texture_t	*e_texture;
 	t_minimap_p		minimap_player;
+	mlx_texture_t	*door_texture;
 }	t_data;
 
 /*INIT*/
@@ -117,8 +125,8 @@ void	init_minimap_player(t_minimap_p *mini);
 
 /*PARSING*/
 void		parse(t_data *data, char *path);
-void		parse_texture(t_data *data, int fd, char *line, int *t_count);
-void		parse_color(t_data *data, int fd, char *line, int *c_count);
+bool		parse_texture(t_data *data, int fd, char *line, int *t_count);
+bool		parse_color(t_data *data, int fd, char *line, int *c_count);
 void		parse_map(t_data *data, char *path, int fd);
 bool		check_map(t_data *data);
 bool		allocate_map(t_data *data, char ***allocate_to);
@@ -128,7 +136,8 @@ void		parse_error(t_data *data, int fd, char *msg);
 void		render_map(t_data *data);
 void		render_player(t_data *data);
 void		draw_minimap(t_data *data);
-void		reset_image(mlx_image_t *image, mlx_t *mlx, int color);
+void		animate_sprite(t_data *data, mlx_image_t *img);
+void		reset_image(mlx_image_t *image, int color);
 float		normalize_angle(float angle);
 void		reset_canvas(t_data *data);
 
@@ -138,11 +147,11 @@ void		draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
 void		draw_circle(float coords[2], float radius, uint32_t color, mlx_image_t *img);
 void		draw_triangle(t_data *data, float direction, uint32_t color);
 bool		valid_coords(t_data *data, int x, int y);
-void		draw_filled_triangle(mlx_image_t *img, t_coordinates pos, float direction);
 void		draw_player(t_data *data);
+int			get_color_texture(mlx_texture_t *texture, int x, int y);
 
 /*PLAYER*/
-void	dda_algo(t_dda *dda, t_data *data, float angle);
+void		dda_algo(t_dda *dda, t_data *data, float angle);
 void		movement(t_data *data);
 bool		wall_collision(t_data *data, const char direction, const char xy);
 
@@ -150,6 +159,7 @@ bool		wall_collision(t_data *data, const char direction, const char xy);
 /*HOOKS*/
 void		keyhook(mlx_key_data_t keydata, void *param);
 void		general_hook(void *param);
+void		cursor_hook(double x, double y, void *param);
 
 /*DEBUG*/
 void		print_data(t_data *data);
