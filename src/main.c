@@ -6,7 +6,7 @@
 /*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/24 13:01:49 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:52:05 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	init_data(t_data *data, t_map *map)
 {
-	int	i;
-	t_minimap_p mini;
+	int			i;
+	t_minimap_p	mini;
 
 	i = -1;
 	while (++i < MAX_KEY)
@@ -86,7 +86,8 @@ int	main(int argc, char **argv)
 	init_data(&data, &map);
 	parse(&data, argv[1]);
 	if (!init_mlx(&data))
-		return (printf("Error\nFailed to initialize MLX\n"), mlx_terminate(data.mlx), 1);
+		return (printf("Error\nFailed to initialize MLX\n"),
+			mlx_terminate(data.mlx), 1);
 	render_map(&data);
 	render_player(&data);
 	mlx_key_hook(data.mlx, &keyhook, (void *)&data);

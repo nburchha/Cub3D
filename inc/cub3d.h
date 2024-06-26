@@ -30,7 +30,7 @@
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 341
 # define BONUS 1
-# define DOOR_PATH "textures/oak_door_top.png"
+# define DOOR_PATH "textures/door.png"
 # define SPRITE_PATH "textures/deagle1056x648.png"
 
 # define FLOOR '0'
@@ -47,24 +47,17 @@ typedef struct s_coordinates
 typedef struct s_dda
 {
 	float			angle;
-
 	float			start_x;
 	float			start_y;
-
 	float			delta_x;
 	float			delta_y;
-
 	float			end_x;
 	float			end_y;
-
 	float			len;
-
 	int				step_direction_x;
 	int				step_direction_y;
-
 	char			wall_face;
 	int				texture;
-
 	int				is_open_door;
 	float			door_end_x;
 	float			door_end_y;
@@ -133,6 +126,8 @@ bool		allocate_map(t_data *data, char ***allocate_to);
 void		parse_error(t_data *data, int fd, char *msg);
 
 /*GRAPHICS*/
+void		cast_projection(t_data *data, t_dda *dda, int column);
+
 void		render_map(t_data *data);
 void		render_player(t_data *data);
 void		draw_minimap(t_data *data);
@@ -152,6 +147,10 @@ int			get_color_texture(mlx_texture_t *texture, int x, int y);
 
 /*PLAYER*/
 void		dda_algo(t_dda *dda, t_data *data, float angle);
+int			get_new_pos(t_dda *dda, char **map);
+int			is_wall_x(char **map, t_dda *dda);
+int			is_wall_y(char **map, t_dda *dda);
+
 void		movement(t_data *data);
 bool		wall_collision(t_data *data, const char direction, const char xy);
 
@@ -163,5 +162,8 @@ void		cursor_hook(double x, double y, void *param);
 
 /*DEBUG*/
 void		print_data(t_data *data);
+
+/*HELPER*/
+float		to_rad(int angle);
 
 #endif
