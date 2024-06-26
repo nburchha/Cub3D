@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:21:59 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 19:12:12 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:08:14 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_coordinates	calculate_new_position(t_data *data,
 		pos = (t_coordinates){data->player.pos.x - cos(data->player.dir) \
 			* MOVE_SPEED, data->player.pos.y + sin(data->player.dir) \
 			* MOVE_SPEED};
-	else if (direction == 'A')
+	else if (direction == 'D')
 		pos = (t_coordinates){data->player.pos.x + sin(data->player.dir) \
 			* MOVE_SPEED, data->player.pos.y + cos(data->player.dir) \
 			* MOVE_SPEED};
