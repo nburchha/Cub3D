@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 15:34:31 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/26 22:59:52 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 341
 # define BONUS 1
-# define DOOR_PATH "textures/dirt_podzol_side.png"
+# define DOOR_PATH "textures/oak_door_top.png"
 # define SPRITE_PATH "textures/deagle1056x648.png"
 
 # define FLOOR '0'

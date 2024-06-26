@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 15:01:22 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/22 19:23:39 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/26 23:17:17 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ static void	draw_overlay(t_data *data, mlx_image_t *img, uint32_t x_offset, \
 void	animate_sprite(t_data *data, mlx_image_t *img)
 {
 	static int				sign = 2;
-	static int				offset = 30;
+	static int				offset = 40;
 
 	reset_image(img, 0x00000000);
-	if (offset <= 0 || offset >= 60)
+	if (offset <= 10 || offset >= 70)
 		sign = -sign;
-	if (data->keys[MLX_KEY_LEFT_SHIFT] && wasd_pressed(data) && offset > 2 && \
-		offset < 58)
+	if (data->keys[MLX_KEY_LEFT_SHIFT] && wasd_pressed(data) && offset > 12 && \
+		offset < 68)
 		offset += sign;
 	if (wasd_pressed(data))
 		offset += sign;
-	draw_overlay(data, img, offset, offset / 2);
+	draw_overlay(data, img, offset, (offset - 10) / 2);
 }
