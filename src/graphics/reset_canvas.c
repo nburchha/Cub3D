@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   reset_canvas.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 19:08:05 by psanger           #+#    #+#             */
-/*   Updated: 2024/06/18 15:58:02 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/22 19:54:45 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
-
-int32_t ft_pixel(int32_t color_code)
-{
-	return (color_code << 8 | 0xFF);
-}
 
 void	reset_canvas(t_data *data)
 {
@@ -28,7 +23,7 @@ void	reset_canvas(t_data *data)
 	{
 		while (x <= WIDTH - 1)
 		{
-			mlx_put_pixel(data->image, x, y, ft_pixel(data->ceiling_color));
+			mlx_put_pixel(data->image, x, y, data->ceiling_color);
 			x++;
 		}
 		x = 0;
@@ -38,7 +33,7 @@ void	reset_canvas(t_data *data)
 	{
 		while (x <= WIDTH - 1)
 		{
-			mlx_put_pixel(data->image, x, y, ft_pixel(data->floor_color));
+			mlx_put_pixel(data->image, x, y, data->floor_color);
 			x++;
 		}
 		x = 0;
