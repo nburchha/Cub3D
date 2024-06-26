@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:02:04 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/22 19:41:20 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/26 23:45:14 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,14 @@ static void	check_file_ending(char *path)
 		parse_error(NULL, -1, "No valid file ending");
 }
 
-void	parse(t_data *data, char *path)
+static void	parse_texture_color(t_data *data, int fd)
 {
-	int		fd;
 	char	*line;
 	int		t_count;
 	int		c_count;
 
 	t_count = 0;
 	c_count = 0;
-	check_file_ending(path);
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		parse_error(NULL, -1, "Could not open file");
 	line = get_next_line(fd);
 	while (line && (c_count < 2 || t_count < 4))
 	{
@@ -76,6 +71,17 @@ void	parse(t_data *data, char *path)
 		free(line);
 	if (c_count < 2 || t_count < 4 || !line)
 		parse_error(data, fd, "Not all requirements met inside .cub file");
+}
+
+void	parse(t_data *data, char *path)
+{
+	int		fd;
+
+	check_file_ending(path);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		parse_error(NULL, -1, "Could not open file");
+	parse_texture_color(data, fd);
 	parse_map(data, path, fd);
 	close(fd);
 }

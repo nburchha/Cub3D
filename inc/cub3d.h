@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 22:59:52 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/27 00:17:09 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,9 +137,6 @@ float		normalize_angle(float angle);
 void		reset_canvas(t_data *data);
 
 void		draw_block(t_data *data, int coords[2], int size, uint32_t color);
-void		draw_line(t_coordinates start, t_coordinates end, uint32_t color, \
-					mlx_image_t *img);
-void		draw_circle(float coords[2], float radius, uint32_t color, mlx_image_t *img);
 void		draw_triangle(t_data *data, float direction, uint32_t color);
 bool		valid_coords(t_data *data, int x, int y);
 void		draw_player(t_data *data);

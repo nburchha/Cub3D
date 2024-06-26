@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:44:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/22 20:54:37 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/26 23:34:57 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ bool	allocate_map(t_data *data, char ***allocate_to)
 		ft_memset(map[i], ' ', data->map->width);
 	}
 	*allocate_to = map;
-	(void)allocate_to;
 	return (true);
 }
 

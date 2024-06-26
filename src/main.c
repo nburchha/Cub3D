@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 17:52:05 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/26 23:34:26 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	init_data(t_data *data, t_map *map)
 static bool	init_mlx(t_data *data)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
-	// printf("mlx: %p\n", data->mlx);
 	if (!data->mlx)
 		return (false);
 	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
@@ -49,10 +48,10 @@ static bool	init_mlx(t_data *data)
 	{
 		data->door_texture = mlx_load_png(DOOR_PATH);
 		if (!data->door_texture)
-			parse_error(data, -1, "Could not load door texture\n");
+			parse_error(data, -1, "Could not load texture\n");
 		data->sprite_texture = mlx_load_png(SPRITE_PATH);
 		if (!data->sprite_texture)
-			parse_error(data, -1, "Could not load deagle texture\n");
+			parse_error(data, -1, "Could not load texture\n");
 	}
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
