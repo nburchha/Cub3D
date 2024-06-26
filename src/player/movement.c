@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:40:27 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/21 10:44:12 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/26 16:07:35 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,22 @@ static void	movement_wasd(t_data *data)
 		data->player.pos.x -= cos(data->player.dir) * speed;
 	if (data->keys[MLX_KEY_S] && !wall_collision(data, 'S', 'y'))
 		data->player.pos.y += sin(data->player.dir) * speed;
-	if (data->keys[MLX_KEY_A] && !wall_collision(data, 'A', 'x'))
-		data->player.pos.x += sin(data->player.dir) * speed;
-	if (data->keys[MLX_KEY_A] && !wall_collision(data, 'A', 'y'))
-		data->player.pos.y += cos(data->player.dir) * speed;
 	if (data->keys[MLX_KEY_D] && !wall_collision(data, 'D', 'x'))
-		data->player.pos.x -= sin(data->player.dir) * speed;
+		data->player.pos.x += sin(data->player.dir) * speed;
 	if (data->keys[MLX_KEY_D] && !wall_collision(data, 'D', 'y'))
+		data->player.pos.y += cos(data->player.dir) * speed;
+	if (data->keys[MLX_KEY_A] && !wall_collision(data, 'A', 'x'))
+		data->player.pos.x -= sin(data->player.dir) * speed;
+	if (data->keys[MLX_KEY_A] && !wall_collision(data, 'A', 'y'))
 		data->player.pos.y -= cos(data->player.dir) * speed;
 }
 
 void	movement(t_data *data)
 {
 	movement_wasd(data);
-	if (data->keys[MLX_KEY_LEFT])
-		data->player.dir -= ROTATE_SPEED;
 	if (data->keys[MLX_KEY_RIGHT])
+		data->player.dir -= ROTATE_SPEED;
+	if (data->keys[MLX_KEY_LEFT])
 		data->player.dir += ROTATE_SPEED;
 	data->player.dir = normalize_angle(data->player.dir);
 }

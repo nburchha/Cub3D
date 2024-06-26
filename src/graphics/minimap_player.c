@@ -3,107 +3,114 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:07:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 21:08:29 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/26 15:34:54 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// Function to sort vertices by their y-coordinates
-void	sort_vertices_by_y(t_coordinates *v0, t_coordinates *v1,
-		t_coordinates *v2)
+bool	is_point_in_triangle(t_coordinates p, t_coordinates a, t_coordinates b,
+		t_coordinates c)
 {
-	t_coordinates	temp;
+	float	denominator;
+	float	alpha;
+	float	beta;
+	float	gamma;
 
-	if (v0->y > v1->y)
-	{
-		temp = *v0;
-		*v0 = *v1;
-		*v1 = temp;
-	}
-	if (v0->y > v2->y)
-	{
-		temp = *v0;
-		*v0 = *v2;
-		*v2 = temp;
-	}
-	if (v1->y > v2->y)
-	{
-		temp = *v1;
-		*v1 = *v2;
-		*v2 = temp;
-	}
+	denominator = ((b.y - c.y) * (a.x - c.x) + (c.x - b.x) * (a.y - c.y));
+	alpha = ((b.y - c.y) * (p.x - c.x) + (c.x - b.x) * (p.y - c.y))
+		/ denominator;
+	beta = ((c.y - a.y) * (p.x - c.x) + (a.x - c.x) * (p.y - c.y))
+		/ denominator;
+	gamma = 1.0 - alpha - beta;
+	return ((alpha > 0) && (beta > 0) && (gamma > 0));
 }
 
-// Function to draw a filled triangle
-void	draw_filled_triangle(t_coordinates v0, t_coordinates v1,
-		t_coordinates v2, uint32_t color, mlx_image_t *img)
+void	get_pos_angle(float *x, float *y, t_data *data)
 {
-	float	curx1;
-	float	curx2;
+	float	delta_x;
+	float	delta_y;
+	float	len;
+	float	angle_norm;
 
-	sort_vertices_by_y(&v0, &v1, &v2);
-	float dx1, dx2, dx3;
-	if (v1.y - v0.y > 0)
+	delta_x = *x - (float)data->minimap_player.start_x;
+	delta_y = *y - (float)data->minimap_player.start_y;
+	len = pow(pow(delta_x, 2) + pow(delta_y, 2), 0.5);
+	angle_norm = atan2(delta_x, delta_y);
+	*x = cos(data->player.dir + angle_norm) * len
+		+ (float)data->minimap_player.start_x;
+	*y = sin(data->player.dir + angle_norm) * len
+		+ (float)data->minimap_player.start_y;
+}
+
+void	init_minimap_player(t_minimap_p *mini)
+{
+	mini->height = 18;
+	mini->width = mini->height / 2;
+	mini->size = mini->height;
+	if (mini->height < mini->width)
+		mini->size = mini->width;
+	mini->size += 2;
+	mini->start_x = 88;
+	mini->start_y = 88;
+	mini->top.x = 0;
+	mini->top.y = 0;
+	mini->left.x = 0;
+	mini->left.y = 0;
+	mini->right.x = 0;
+	mini->right.y = 0;
+	mini->p.x = 0;
+	mini->p.y = 0;
+}
+
+void	adjust_corner_pos(t_data *data)
+{
+	data->minimap_player.top.x = data->minimap_player.start_x;
+	data->minimap_player.top.y = data->minimap_player.start_y
+		- data->minimap_player.height / 2;
+	get_pos_angle(&data->minimap_player.top.x, &data->minimap_player.top.y,
+		data);
+	data->minimap_player.left.x = data->minimap_player.start_x
+		- data->minimap_player.width / 2;
+	data->minimap_player.left.y = data->minimap_player.start_y
+		+ data->minimap_player.height / 2;
+	get_pos_angle(&data->minimap_player.left.x, &data->minimap_player.left.y,
+		data);
+	data->minimap_player.right.x = data->minimap_player.start_x
+		+ data->minimap_player.width / 2;
+	data->minimap_player.right.y = data->minimap_player.start_y
+		+ data->minimap_player.height / 2;
+	get_pos_angle(&data->minimap_player.right.x, &data->minimap_player.right.y,
+		data);
+}
+
+void	draw_player(t_data *data)
+{
+	int	i;
+	int	j;
+
+	adjust_corner_pos(data);
+	i = data->minimap_player.start_y - data->minimap_player.size;
+	j = data->minimap_player.start_x - data->minimap_player.size;
+	while (i < data->minimap_player.start_y + data->minimap_player.size)
 	{
-		dx1 = (v1.x - v0.x) / (v1.y - v0.y);
-	}
-	else
-	{
-		dx1 = 0;
-	}
-	if (v2.y - v0.y > 0)
-	{
-		dx2 = (v2.x - v0.x) / (v2.y - v0.y);
-	}
-	else
-	{
-		dx2 = 0;
-	}
-	if (v2.y - v1.y > 0)
-	{
-		dx3 = (v2.x - v1.x) / (v2.y - v1.y);
-	}
-	else
-	{
-		dx3 = 0;
-	}
-	curx1 = v0.x;
-	curx2 = v0.x;
-	for (int y = v0.y; y <= v2.y; y++)
-	{
-		if (y < v1.y)
+		j = data->minimap_player.start_x - data->minimap_player.size;
+		while (j < data->minimap_player.start_x + data->minimap_player.size)
 		{
-			if (dx1 < dx2)
+			data->minimap_player.p.x = j;
+			data->minimap_player.p.y = i;
+			if (is_point_in_triangle(data->minimap_player.p,
+					data->minimap_player.top, data->minimap_player.left,
+					data->minimap_player.right))
 			{
-				draw_line((t_coordinates){curx1, y}, (t_coordinates){curx2, y},
-					color, img);
+				if (i < HEIGHT && i > 0 && j < WIDTH && j > 0)
+					mlx_put_pixel(data->minimap, j, i, 0xFF0000FF);
 			}
-			else
-			{
-				draw_line((t_coordinates){curx2, y}, (t_coordinates){curx1, y},
-					color, img);
-			}
-			curx1 += dx1;
-			curx2 += dx2;
+			j++;
 		}
-		else
-		{
-			if (dx3 < dx2)
-			{
-				draw_line((t_coordinates){curx1, y}, (t_coordinates){curx2, y},
-					color, img);
-			}
-			else
-			{
-				draw_line((t_coordinates){curx2, y}, (t_coordinates){curx1, y},
-					color, img);
-			}
-			curx1 += dx3;
-			curx2 += dx2;
-		}
+		i++;
 	}
 }
