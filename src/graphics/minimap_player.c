@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:07:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 15:34:54 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/26 16:24:11 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ void	get_pos_angle(float *x, float *y, t_data *data)
 	delta_y = *y - (float)data->minimap_player.start_y;
 	len = pow(pow(delta_x, 2) + pow(delta_y, 2), 0.5);
 	angle_norm = atan2(delta_x, delta_y);
-	*x = cos(data->player.dir + angle_norm) * len
+	*x = cos(-data->player.dir + M_PI + angle_norm) * len
 		+ (float)data->minimap_player.start_x;
-	*y = sin(data->player.dir + angle_norm) * len
+	*y = sin(-data->player.dir + M_PI+ angle_norm) * len
 		+ (float)data->minimap_player.start_y;
 }
 
 void	init_minimap_player(t_minimap_p *mini)
 {
 	mini->height = 18;
-	mini->width = mini->height / 2;
+	mini->width = mini->height / 1.5;
 	mini->size = mini->height;
 	if (mini->height < mini->width)
 		mini->size = mini->width;
