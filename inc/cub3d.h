@@ -6,7 +6,7 @@
 /*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 15:34:31 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/26 17:17:34 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 341
 # define BONUS 1
-# define DOOR_PATH "textures/dirt_podzol_side.png"
+// # define DOOR_PATH "textures/dirt_podzol_side.png"
+# define DOOR_PATH "textures/door.png"
 # define SPRITE_PATH "textures/deagle1056x648.png"
 
 # define FLOOR '0'
@@ -152,6 +153,10 @@ int			get_color_texture(mlx_texture_t *texture, int x, int y);
 
 /*PLAYER*/
 void		dda_algo(t_dda *dda, t_data *data, float angle);
+int			get_new_pos(t_dda *dda, char **map);
+int			is_wall_x(char **map, t_dda *dda);
+int			is_wall_y(char **map, t_dda *dda);
+
 void		movement(t_data *data);
 bool		wall_collision(t_data *data, const char direction, const char xy);
 
