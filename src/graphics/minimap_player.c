@@ -6,104 +6,39 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:07:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/19 21:08:29 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:00:16 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// Function to sort vertices by their y-coordinates
-void	sort_vertices_by_y(t_coordinates *v0, t_coordinates *v1,
-		t_coordinates *v2)
+void	draw_filled_triangle(mlx_image_t *img, t_coordinates pos, float direction)
 {
-	t_coordinates	temp;
+	int	i;
+	int	j;
+	int	line_len;
 
-	if (v0->y > v1->y)
+	i = 0;
+	line_len = 0;
+	pos.x = M_SCALE * 5;// + M_SCALE / 2;
+	pos.y = M_SCALE * 5;// + M_SCALE / 2;
+	int center_x = pos.x + M_SCALE / 2;
+	int center_y = pos.y + M_SCALE / 2;
+	direction = normalize_angle(-direction);
+	draw_circle((float [2]){center_x, center_y}, M_SCALE / 8, 0xFFFFFFFF, img);
+	while (i < M_SCALE * 2)
 	{
-		temp = *v0;
-		*v0 = *v1;
-		*v1 = temp;
-	}
-	if (v0->y > v2->y)
-	{
-		temp = *v0;
-		*v0 = *v2;
-		*v2 = temp;
-	}
-	if (v1->y > v2->y)
-	{
-		temp = *v1;
-		*v1 = *v2;
-		*v2 = temp;
-	}
-}
-
-// Function to draw a filled triangle
-void	draw_filled_triangle(t_coordinates v0, t_coordinates v1,
-		t_coordinates v2, uint32_t color, mlx_image_t *img)
-{
-	float	curx1;
-	float	curx2;
-
-	sort_vertices_by_y(&v0, &v1, &v2);
-	float dx1, dx2, dx3;
-	if (v1.y - v0.y > 0)
-	{
-		dx1 = (v1.x - v0.x) / (v1.y - v0.y);
-	}
-	else
-	{
-		dx1 = 0;
-	}
-	if (v2.y - v0.y > 0)
-	{
-		dx2 = (v2.x - v0.x) / (v2.y - v0.y);
-	}
-	else
-	{
-		dx2 = 0;
-	}
-	if (v2.y - v1.y > 0)
-	{
-		dx3 = (v2.x - v1.x) / (v2.y - v1.y);
-	}
-	else
-	{
-		dx3 = 0;
-	}
-	curx1 = v0.x;
-	curx2 = v0.x;
-	for (int y = v0.y; y <= v2.y; y++)
-	{
-		if (y < v1.y)
+		if (i % 2 == 0)
+			line_len++;
+		j = line_len;
+		while (j < M_SCALE - line_len)
 		{
-			if (dx1 < dx2)
-			{
-				draw_line((t_coordinates){curx1, y}, (t_coordinates){curx2, y},
-					color, img);
-			}
-			else
-			{
-				draw_line((t_coordinates){curx2, y}, (t_coordinates){curx1, y},
-					color, img);
-			}
-			curx1 += dx1;
-			curx2 += dx2;
+			int rotated_x = (int)(center_x + (pos.x - center_x + j) * cos(direction) - (pos.y - center_y + i) * sin(direction));
+			int rotated_y = (int)(center_y + (pos.x - center_x + j) * sin(direction) + (pos.y - center_y + i) * cos(direction));
+			mlx_put_pixel(img, rotated_x, rotated_y, 0xFF0000FF);
+			j++;
 		}
-		else
-		{
-			if (dx3 < dx2)
-			{
-				draw_line((t_coordinates){curx1, y}, (t_coordinates){curx2, y},
-					color, img);
-			}
-			else
-			{
-				draw_line((t_coordinates){curx2, y}, (t_coordinates){curx1, y},
-					color, img);
-			}
-			curx1 += dx3;
-			curx2 += dx2;
-		}
+		i++;
 	}
+	(void)direction;
 }
