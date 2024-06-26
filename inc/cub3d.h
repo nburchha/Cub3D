@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 17:49:53 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/26 22:59:52 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define ROTATE_SPEED 0.1f
 # define MAX_KEY 341
 # define BONUS 1
-// # define DOOR_PATH "textures/dirt_podzol_side.png"
 # define DOOR_PATH "textures/door.png"
 # define SPRITE_PATH "textures/deagle1056x648.png"
 
@@ -48,24 +47,17 @@ typedef struct s_coordinates
 typedef struct s_dda
 {
 	float			angle;
-
 	float			start_x;
 	float			start_y;
-
 	float			delta_x;
 	float			delta_y;
-
 	float			end_x;
 	float			end_y;
-
 	float			len;
-
 	int				step_direction_x;
 	int				step_direction_y;
-
 	char			wall_face;
 	int				texture;
-
 	int				is_open_door;
 	float			door_end_x;
 	float			door_end_y;
