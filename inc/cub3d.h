@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/27 00:17:09 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/27 13:52:42 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "libs42/libs42.h"
+# include <fcntl.h>
+# include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <fcntl.h>
 # include <unistd.h>
-# include <math.h>
 
 # define WIDTH 2048
 # define HEIGHT 1024
 # define PIXEL_SIZE 64.0f
-# define M_SCALE (PIXEL_SIZE / 4.0)
+# define M_SCALE 16.0f
 # define FOV 60
 # define MOVE_SPEED 5.0f
 # define ROTATE_SPEED 0.1f
@@ -40,9 +40,9 @@
 
 typedef struct s_coordinates
 {
-	float		x;
-	float		y;
-}	t_coordinates;
+	float			x;
+	float			y;
+}					t_coordinates;
 
 typedef struct s_dda
 {
@@ -61,7 +61,7 @@ typedef struct s_dda
 	int				is_open_door;
 	float			door_end_x;
 	float			door_end_y;
-}				t_dda;
+}					t_dda;
 
 typedef struct s_minimap_player
 {
@@ -76,7 +76,7 @@ typedef struct s_minimap_player
 	int				start_y;
 	int				i;
 	int				j;
-}	t_minimap_p;
+}					t_minimap_p;
 
 typedef struct s_map
 {
@@ -84,13 +84,13 @@ typedef struct s_map
 	int				height;
 	char			**map;
 	t_coordinates	spawn;
-}	t_map;
+}					t_map;
 
 typedef struct s_player
 {
 	t_coordinates	pos;
 	float			dir;
-}	t_player;
+}					t_player;
 
 typedef struct s_data
 {
@@ -111,56 +111,59 @@ typedef struct s_data
 	mlx_texture_t	*e_texture;
 	t_minimap_p		minimap_player;
 	mlx_texture_t	*door_texture;
-}	t_data;
+}					t_data;
 
 /*INIT*/
-void	init_minimap_player(t_minimap_p *mini);
+void				init_minimap_player(t_minimap_p *mini);
 
 /*PARSING*/
-void		parse(t_data *data, char *path);
-bool		parse_texture(t_data *data, int fd, char *line, int *t_count);
-bool		parse_color(t_data *data, int fd, char *line, int *c_count);
-void		parse_map(t_data *data, char *path, int fd);
-bool		check_map(t_data *data);
-bool		allocate_map(t_data *data, char ***allocate_to);
-void		parse_error(t_data *data, int fd, char *msg);
+void				parse(t_data *data, char *path);
+bool				parse_texture(t_data *data, int fd, char *line,
+						int *t_count);
+bool				parse_color(t_data *data, int fd, char *line, int *c_count);
+void				parse_map(t_data *data, char *path, int fd);
+bool				check_map(t_data *data);
+bool				allocate_map(t_data *data, char ***allocate_to);
+void				parse_error(t_data *data, int fd, char *msg);
 
 /*GRAPHICS*/
-void		cast_projection(t_data *data, t_dda *dda, int column);
+void				cast_projection(t_data *data, t_dda *dda, int column);
 
-void		render_map(t_data *data);
-void		render_player(t_data *data);
-void		draw_minimap(t_data *data);
-void		animate_sprite(t_data *data, mlx_image_t *img);
-void		reset_image(mlx_image_t *image, int color);
-float		normalize_angle(float angle);
-void		reset_canvas(t_data *data);
+void				render_map(t_data *data);
+void				render_player(t_data *data);
+void				draw_minimap(t_data *data);
+void				animate_sprite(t_data *data, mlx_image_t *img);
+void				reset_image(mlx_image_t *image, int color);
+float				normalize_angle(float angle);
+void				reset_canvas(t_data *data);
 
-void		draw_block(t_data *data, int coords[2], int size, uint32_t color);
-void		draw_triangle(t_data *data, float direction, uint32_t color);
-bool		valid_coords(t_data *data, int x, int y);
-void		draw_player(t_data *data);
-int			get_color_texture(mlx_texture_t *texture, int x, int y);
+void				draw_block(t_data *data, int coords[2], int size,
+						uint32_t color);
+void				draw_triangle(t_data *data, float direction,
+						uint32_t color);
+bool				valid_coords(t_data *data, int x, int y);
+void				draw_player(t_data *data);
+int					get_color_texture(mlx_texture_t *texture, int x, int y);
 
 /*PLAYER*/
-void		dda_algo(t_dda *dda, t_data *data, float angle);
-int			get_new_pos(t_dda *dda, char **map);
-int			is_wall_x(char **map, t_dda *dda);
-int			is_wall_y(char **map, t_dda *dda);
+void				dda_algo(t_dda *dda, t_data *data, float angle);
+int					get_new_pos(t_dda *dda, char **map);
+int					is_wall_x(char **map, t_dda *dda);
+int					is_wall_y(char **map, t_dda *dda);
 
-void		movement(t_data *data);
-bool		wall_collision(t_data *data, const char direction, const char xy);
-
+void				movement(t_data *data);
+bool				wall_collision(t_data *data, const char direction,
+						const char xy);
 
 /*HOOKS*/
-void		keyhook(mlx_key_data_t keydata, void *param);
-void		general_hook(void *param);
-void		cursor_hook(double x, double y, void *param);
+void				keyhook(mlx_key_data_t keydata, void *param);
+void				general_hook(void *param);
+void				cursor_hook(double x, double y, void *param);
 
 /*DEBUG*/
-void		print_data(t_data *data);
+void				print_data(t_data *data);
 
 /*HELPER*/
-float		to_rad(int angle);
+float				to_rad(int angle);
 
 #endif
