@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 23:34:26 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/27 17:56:13 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ static bool	init_mlx(t_data *data)
 
 static void	cleanup(t_data *data)
 {
+	if (data->sprite_texture)
+		mlx_delete_texture(data->sprite_texture);
+	if (data->door_texture)
+		mlx_delete_texture(data->door_texture);
 	if (data->n_texture)
 		mlx_delete_texture(data->n_texture);
 	if (data->s_texture)
