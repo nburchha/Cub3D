@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/27 13:52:42 by psanger          ###   ########.fr       */
+/*   Updated: 2024/06/28 10:39:23 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ void				parse_error(t_data *data, int fd, char *msg);
 /*GRAPHICS*/
 void				cast_projection(t_data *data, t_dda *dda, int column);
 
-void				render_map(t_data *data);
 void				render_player(t_data *data);
 void				draw_minimap(t_data *data);
 void				animate_sprite(t_data *data, mlx_image_t *img);
