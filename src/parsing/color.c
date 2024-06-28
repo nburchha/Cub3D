@@ -6,11 +6,22 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:16:52 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/22 19:52:08 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/06/28 09:58:09 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static bool	is_digit_str(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if (!ft_isdigit(str[i]))
+			return (false);
+	return (true);
+}
 
 static bool	convert_to_int(char **rgb_char, uint32_t *color)
 {
@@ -20,6 +31,8 @@ static bool	convert_to_int(char **rgb_char, uint32_t *color)
 	i = -1;
 	while (rgb_char[++i] && i < 3)
 	{
+		if (!is_digit_str(rgb_char[i]))
+			return (false);
 		rgb[i] = ft_atoi(rgb_char[i]);
 		if (rgb[i] < 0 || rgb[i] > 255)
 			return (false);
