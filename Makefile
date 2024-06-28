@@ -22,7 +22,7 @@ RESET = \033[0m
 
 
 SRC = main.c parse.c texture.c map.c \
-color.c check_map.c render_map.c \
+color.c check_map.c \
 util.c keyhook.c render_player.c \
 general_hook.c movement.c dda_algo.c \
 minimap.c wall_collision.c reset_canvas.c \

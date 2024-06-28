@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:21:29 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/21 09:36:37 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/06/28 10:32:06 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	draw_minimap_border(t_data *data)
 
 uint32_t	get_minimap_color(t_data *data, int x, int y)
 {
-	if (!valid_coords(data, x, y))
+	if (!valid_coords(data, x, y) || data->map->map[y][x] == ' ')
 		return (0x000000FF);
 	else if (data->map->map[y][x] == WALL)
 		return (data->ceiling_color);
