@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:02:04 by nburchha          #+#    #+#             */
-/*   Updated: 2024/07/01 17:22:01 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:24:19 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	parse_texture_color(t_data *data, int fd)
 	line = get_next_line(fd);
 	while (line && (c_count < 2 || t_count < 4))
 	{
-		if (line[0] == ' ' || line[0] == '1' || line[0] == '0' || line[0] == '2')
+		if (ft_strchr("012", line[0]))
 			break ;
 		if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
