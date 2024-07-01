@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:02:04 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 23:45:14 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/07/01 17:22:01 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	parse_texture_color(t_data *data, int fd)
 	line = get_next_line(fd);
 	while (line && (c_count < 2 || t_count < 4))
 	{
-		if (line[0] == ' ')
+		if (line[0] == ' ' || line[0] == '1' || line[0] == '0' || line[0] == '2')
 			break ;
 		if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
@@ -65,10 +65,10 @@ static void	parse_texture_color(t_data *data, int fd)
 			!parse_texture(data, fd, line, &t_count) && line[0] != '\0')
 			parse_error(data, fd, "Could not parse texture or color");
 		free(line);
+		if (c_count == 2 && t_count == 4)
+			break ;
 		line = get_next_line(fd);
 	}
-	if (line)
-		free(line);
 	if (c_count < 2 || t_count < 4 || !line)
 		parse_error(data, fd, "Not all requirements met inside .cub file");
 }
