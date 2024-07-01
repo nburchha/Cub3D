@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/26 17:48:31 by psanger          ###   ########.fr       */
+/*   Updated: 2024/07/01 13:38:14 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	render_player(t_data *data)
 	t_dda	dda;
 
 	ray_angle = data->player.dir - (FOV / 2) * (M_PI / 180);
-	column = WIDTH;
+	column = WIDTH - 1;
 	reset_canvas(data);
-	while (ray_angle <= data->player.dir + ((FOV / 2) * (M_PI / 180)))
+	while (ray_angle < data->player.dir + ((FOV / 2) * (M_PI / 180)))
 	{
 		dda_algo(&dda, data, normalize_angle(ray_angle));
 		cast_projection(data, &dda, column);
