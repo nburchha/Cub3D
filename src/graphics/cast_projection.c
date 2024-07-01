@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:40:57 by psanger           #+#    #+#             */
-/*   Updated: 2024/07/01 17:27:30 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:19:25 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	cast_projection(t_data *data, t_dda *dda, int column)
 	double	real_height;
 	int		y_pixel;
 
-	real_len = fabs(cos(to_rad((double)((((double)FOV * (-1)) / 2) + (((double)FOV
-								/ (double)WIDTH) * (double)column)))) * dda->len);
+	real_len = fabs(cos(to_rad((double)((((double)FOV * (-1)) / 2) + \
+				(((double)FOV / (double)WIDTH) * (double)column)))) * dda->len);
 	height = (1500 / real_len);
 	real_height = height;
 	if (height > HEIGHT)

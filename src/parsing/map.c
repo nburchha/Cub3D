@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:44:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/07/01 17:22:42 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:17:53 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,11 @@ static bool	copy_map_from_file(t_map *map, int fd)
 void	parse_map(t_data *data, char *path, int fd)
 {
 	if (!get_map_size(path, data->map))
-		parse_error(data, fd, "Could not get map size");
+		parse_error(data, fd, "The map doesnt fulfill all criteria");
 	if (!allocate_map(data, &data->map->map))
 		parse_error(data, fd, "Malloc failed");
 	if (!copy_map_from_file(data->map, fd))
-		parse_error(data, fd, "Could not copy map from file");
+		parse_error(data, fd, "The map doesnt fulfill all criteria");
 	if (!check_map(data))
 		parse_error(data, fd, "The map doesnt fulfill all criteria");
 }
