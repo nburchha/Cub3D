@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 15:01:22 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 23:17:17 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/07/01 23:25:18 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	animate_sprite(t_data *data, mlx_image_t *img)
 	static int				offset = 40;
 
 	reset_image(img, 0x00000000);
-	if (offset <= 10 || offset >= 70)
+	if ((offset <= 10 && sign < 0) || (offset >= 70 && sign > 0))
 		sign = -sign;
 	if (data->keys[MLX_KEY_LEFT_SHIFT] && wasd_pressed(data) && offset > 12 && \
 		offset < 68)
@@ -55,4 +55,5 @@ void	animate_sprite(t_data *data, mlx_image_t *img)
 	if (wasd_pressed(data))
 		offset += sign;
 	draw_overlay(data, img, offset, (offset - 10) / 2);
+	printf("offset: %d\n", offset);
 }
