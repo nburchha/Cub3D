@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/07/01 13:38:14 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/01 13:42:38 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	render_player(t_data *data)
 	ray_angle = data->player.dir - (FOV / 2) * (M_PI / 180);
 	column = WIDTH - 1;
 	reset_canvas(data);
-	while (ray_angle < data->player.dir + ((FOV / 2) * (M_PI / 180)))
+	while (column >= 0)
 	{
 		dda_algo(&dda, data, normalize_angle(ray_angle));
 		cast_projection(data, &dda, column);
