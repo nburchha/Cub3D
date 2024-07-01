@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:40:57 by psanger           #+#    #+#             */
-/*   Updated: 2024/06/28 11:14:43 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:27:30 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	get_color_texture(mlx_texture_t *texture, int x, int y)
 			texture->pixels[pixel + 2], texture->pixels[pixel + 3]));
 }
 
-static void	get_pixel_size(t_data *data, t_dda *dda, float *pixel_size)
+static void	get_pixel_size(t_data *data, t_dda *dda, double *pixel_size)
 {
 	if (dda->wall_face == 'N')
 		*pixel_size = data->n_texture->width;
@@ -43,9 +43,9 @@ static void	get_pixel_size(t_data *data, t_dda *dda, float *pixel_size)
 
 static int	get_color(t_data *data, t_dda *dda, int y_pixel, int height)
 {
-	float	x;
-	float	y;
-	float	pixel_size;
+	double	x;
+	double	y;
+	double	pixel_size;
 
 	pixel_size = 0;
 	x = 0;
@@ -55,8 +55,8 @@ static int	get_color(t_data *data, t_dda *dda, int y_pixel, int height)
 		x = (dda->end_x - (int)dda->end_x) * pixel_size;
 	if (dda->wall_face == 'O' || dda->wall_face == 'W')
 		x = (dda->end_y - (int)dda->end_y) * pixel_size;
-	y = fmax(0, fmin(((float)y_pixel - (HEIGHT / 2 - (float)height / 2)) / \
-		(float)height * pixel_size, pixel_size - 1));
+	y = fmax(0, fmin(((double)y_pixel - (HEIGHT / 2 - (double)height / 2)) / \
+		(double)height * pixel_size, pixel_size - 1));
 	if (dda->texture == 2)
 		return (get_color_texture(data->door_texture, (int)x, (int)y));
 	if (dda->wall_face == 'N')
@@ -72,13 +72,13 @@ static int	get_color(t_data *data, t_dda *dda, int y_pixel, int height)
 
 void	cast_projection(t_data *data, t_dda *dda, int column)
 {
-	float	real_len;
-	float	height;
-	float	real_height;
+	double	real_len;
+	double	height;
+	double	real_height;
 	int		y_pixel;
 
-	real_len = fabs(cos(to_rad((float)((((float)FOV * (-1)) / 2) + (((float)FOV
-								/ (float)WIDTH) * (float)column)))) * dda->len);
+	real_len = fabs(cos(to_rad((double)((((double)FOV * (-1)) / 2) + (((double)FOV
+								/ (double)WIDTH) * (double)column)))) * dda->len);
 	height = (1500 / real_len);
 	real_height = height;
 	if (height > HEIGHT)

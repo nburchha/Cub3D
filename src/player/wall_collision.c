@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:21:59 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 16:08:14 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:27:30 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_coordinates	calculate_new_position(t_data *data,
 	return (pos);
 }
 
-static bool	check_collision(t_data *data, t_coordinates pos, float player_size, \
+static bool	check_collision(t_data *data, t_coordinates pos, double player_size, \
 							const char xy)
 {
 	t_coordinates	cur_pos;
@@ -66,7 +66,7 @@ static bool	check_collision(t_data *data, t_coordinates pos, float player_size, 
 bool	wall_collision(t_data *data, const char direction, const char xy)
 {
 	t_coordinates	pos;
-	float			player_size;
+	double			player_size;
 
 	player_size = PIXEL_SIZE / 8;
 	pos = calculate_new_position(data, direction);

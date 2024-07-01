@@ -6,13 +6,13 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:48:48 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/22 15:52:14 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:27:30 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	normalize_angle(float angle)
+double	normalize_angle(double angle)
 {
 	if (angle < 0)
 		angle += 2 * M_PI;

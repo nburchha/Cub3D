@@ -6,13 +6,13 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:23:37 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/07/01 13:42:38 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:27:30 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	to_rad(int angle)
+double	to_rad(int angle)
 {
 	return (M_PI / 180 * angle);
 }
@@ -45,7 +45,7 @@ static void	draw_crosshair(t_data *data)
 
 void	render_player(t_data *data)
 {
-	float	ray_angle;
+	double	ray_angle;
 	int		column;
 	t_dda	dda;
 
