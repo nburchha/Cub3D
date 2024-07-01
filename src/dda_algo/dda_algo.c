@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:07:05 by psanger           #+#    #+#             */
-/*   Updated: 2024/07/01 17:27:30 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/01 23:31:17 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ char	wall_face(int is_wall, t_dda *dda)
 	if (is_wall == 2)
 		is_wall *= dda->step_direction_y;
 	if (is_wall == 1)
-		return ('W');
-	if (is_wall == -1)
 		return ('O');
+	if (is_wall == -1)
+		return ('W');
 	if (is_wall == 2)
-		return ('N');
-	if (is_wall == -2)
 		return ('S');
+	if (is_wall == -2)
+		return ('N');
 	return (0);
 }
 
