@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:07:57 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/26 17:27:33 by psanger          ###   ########.fr       */
+/*   Updated: 2024/07/01 17:27:30 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 bool	is_point_in_triangle(t_coordinates p, t_coordinates a, t_coordinates b,
 		t_coordinates c)
 {
-	float	denominator;
-	float	alpha;
-	float	beta;
-	float	gamma;
+	double	denominator;
+	double	alpha;
+	double	beta;
+	double	gamma;
 
 	denominator = ((b.y - c.y) * (a.x - c.x) + (c.x - b.x) * (a.y - c.y));
 	alpha = ((b.y - c.y) * (p.x - c.x) + (c.x - b.x) * (p.y - c.y))
@@ -29,21 +29,21 @@ bool	is_point_in_triangle(t_coordinates p, t_coordinates a, t_coordinates b,
 	return ((alpha > 0) && (beta > 0) && (gamma > 0));
 }
 
-void	get_pos_angle(float *x, float *y, t_data *data)
+void	get_pos_angle(double *x, double *y, t_data *data)
 {
-	float	delta_x;
-	float	delta_y;
-	float	len;
-	float	angle_norm;
+	double	delta_x;
+	double	delta_y;
+	double	len;
+	double	angle_norm;
 
-	delta_x = *x - (float)data->minimap_player.start_x;
-	delta_y = *y - (float)data->minimap_player.start_y;
+	delta_x = *x - (double)data->minimap_player.start_x;
+	delta_y = *y - (double)data->minimap_player.start_y;
 	len = pow(pow(delta_x, 2) + pow(delta_y, 2), 0.5);
 	angle_norm = atan2(delta_x, delta_y);
 	*x = cos(-data->player.dir + M_PI + angle_norm) * len
-		+ (float)data->minimap_player.start_x;
+		+ (double)data->minimap_player.start_x;
 	*y = sin(-data->player.dir + M_PI + angle_norm) * len
-		+ (float)data->minimap_player.start_y;
+		+ (double)data->minimap_player.start_y;
 }
 
 void	init_minimap_player(t_minimap_p *mini)

@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:14:54 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/22 19:47:58 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:00:07 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static bool	save_texture(t_data *data, char *line)
 	split = ft_split(line, ' ');
 	if (!split)
 		return (false);
-	else if (!split[1])
+	else if (!split[1] || split[2])
 		return (free_split(split), free(line), false);
 	texture = mlx_load_png(split[1]);
 	if (!texture)

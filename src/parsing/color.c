@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:16:52 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/28 09:58:09 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/01 14:59:32 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static bool	extract_color(t_data *data, char *line)
 	split = ft_split(line, ' ');
 	if (!split)
 		return (false);
-	if (!split[1])
+	if (!split[1] || split[2])
 		return (free_split(split), false);
 	rgb_char = ft_split(split[1], ',');
 	if (!rgb_char)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:07:05 by psanger           #+#    #+#             */
-/*   Updated: 2024/06/26 17:22:07 by psanger          ###   ########.fr       */
+/*   Updated: 2024/07/01 17:27:30 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	get_dir(float rad, int *step_dir_x, int *step_dir_y)
+void	get_dir(double rad, int *step_dir_x, int *step_dir_y)
 {
 	if (rad >= 0 && rad <= M_PI / 2)
 	{
@@ -53,7 +53,7 @@ char	wall_face(int is_wall, t_dda *dda)
 	return (0);
 }
 
-void	init_dda(t_dda *dda, t_data *data, float angle)
+void	init_dda(t_dda *dda, t_data *data, double angle)
 {
 	dda->delta_x = 0;
 	dda->delta_y = 0;
@@ -69,7 +69,7 @@ void	init_dda(t_dda *dda, t_data *data, float angle)
 	get_dir(dda->angle, &dda->step_direction_x, &dda->step_direction_y);
 }
 
-void	dda_algo(t_dda *dda, t_data *data, float angle)
+void	dda_algo(t_dda *dda, t_data *data, double angle)
 {
 	int	is_wall;
 

@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:11:03 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/28 10:39:23 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:37:24 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 
 # define WIDTH 2048
 # define HEIGHT 1024
-# define PIXEL_SIZE 64.0f
-# define M_SCALE 16.0f
+# define PIXEL_SIZE 64.0
+# define M_SCALE 16.0
 # define FOV 60
-# define MOVE_SPEED 5.0f
-# define ROTATE_SPEED 0.1f
+# define MOVE_SPEED 5.0
+# define ROTATE_SPEED 0.1
 # define MAX_KEY 341
 # define BONUS 1
 # define DOOR_PATH "textures/door.png"
@@ -40,27 +40,27 @@
 
 typedef struct s_coordinates
 {
-	float			x;
-	float			y;
+	double			x;
+	double			y;
 }					t_coordinates;
 
 typedef struct s_dda
 {
-	float			angle;
-	float			start_x;
-	float			start_y;
-	float			delta_x;
-	float			delta_y;
-	float			end_x;
-	float			end_y;
-	float			len;
+	double			angle;
+	double			start_x;
+	double			start_y;
+	double			delta_x;
+	double			delta_y;
+	double			end_x;
+	double			end_y;
+	double			len;
 	int				step_direction_x;
 	int				step_direction_y;
 	char			wall_face;
 	int				texture;
 	int				is_open_door;
-	float			door_end_x;
-	float			door_end_y;
+	double			door_end_x;
+	double			door_end_y;
 }					t_dda;
 
 typedef struct s_minimap_player
@@ -89,7 +89,7 @@ typedef struct s_map
 typedef struct s_player
 {
 	t_coordinates	pos;
-	float			dir;
+	double			dir;
 }					t_player;
 
 typedef struct s_data
@@ -101,7 +101,7 @@ typedef struct s_data
 	mlx_texture_t	*sprite_texture;
 	t_map			*map;
 	t_player		player;
-	float			scale;
+	double			scale;
 	bool			keys[MAX_KEY];
 	uint32_t		ceiling_color;
 	uint32_t		floor_color;
@@ -133,19 +133,19 @@ void				render_player(t_data *data);
 void				draw_minimap(t_data *data);
 void				animate_sprite(t_data *data, mlx_image_t *img);
 void				reset_image(mlx_image_t *image, int color);
-float				normalize_angle(float angle);
+double				normalize_angle(double angle);
 void				reset_canvas(t_data *data);
 
 void				draw_block(t_data *data, int coords[2], int size,
 						uint32_t color);
-void				draw_triangle(t_data *data, float direction,
+void				draw_triangle(t_data *data, double direction,
 						uint32_t color);
 bool				valid_coords(t_data *data, int x, int y);
 void				draw_player(t_data *data);
 int					get_color_texture(mlx_texture_t *texture, int x, int y);
 
 /*PLAYER*/
-void				dda_algo(t_dda *dda, t_data *data, float angle);
+void				dda_algo(t_dda *dda, t_data *data, double angle);
 int					get_new_pos(t_dda *dda, char **map);
 int					is_wall_x(char **map, t_dda *dda);
 int					is_wall_y(char **map, t_dda *dda);
@@ -163,6 +163,6 @@ void				cursor_hook(double x, double y, void *param);
 void				print_data(t_data *data);
 
 /*HELPER*/
-float				to_rad(int angle);
+double				to_rad(int angle);
 
 #endif

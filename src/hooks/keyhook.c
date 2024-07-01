@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhook.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
+/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:00:10 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/06/26 22:59:14 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/07/01 17:27:30 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	door_in_reach(t_data *data)
 {
 	t_dda	dda;
-	float	open_door_len;
+	double	open_door_len;
 	int		x;
 	int		y;
 
@@ -30,12 +30,12 @@ static void	door_in_reach(t_data *data)
 			+ pow(dda.door_end_y - dda.start_y, 2), 0.5);
 	if (dda.is_open_door == 2)
 	{
-		if (data->map->map[y][x] == DOOR && open_door_len < (float)3)
+		if (data->map->map[y][x] == DOOR && open_door_len < (double)3)
 			data->map->map[y][x] = OPEN_DOOR;
 	}
 	if (dda.is_open_door == 3)
 	{
-		if (data->map->map[y][x] == OPEN_DOOR && open_door_len < (float)3)
+		if (data->map->map[y][x] == OPEN_DOOR && open_door_len < (double)3)
 			data->map->map[y][x] = DOOR;
 	}
 }
