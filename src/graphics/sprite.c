@@ -6,7 +6,7 @@
 /*   By: niklasburchhardt <niklasburchhardt@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 15:01:22 by nburchha          #+#    #+#             */
-/*   Updated: 2024/07/01 23:25:18 by niklasburch      ###   ########.fr       */
+/*   Updated: 2024/07/01 23:28:32 by niklasburch      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,4 @@ void	animate_sprite(t_data *data, mlx_image_t *img)
 	if (wasd_pressed(data))
 		offset += sign;
 	draw_overlay(data, img, offset, (offset - 10) / 2);
-	printf("offset: %d\n", offset);
 }
