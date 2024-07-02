@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:14:54 by niklasburch       #+#    #+#             */
-/*   Updated: 2024/07/01 15:00:07 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:15:34 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ bool	parse_texture(t_data *data, int fd, char *line, int *t_count)
 		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
 	{
 		if (!save_texture(data, line))
+		{
+			if (line != NULL)
+				free(line);
 			parse_error(data, fd, "Could not load texture");
+		}
 		(*t_count)++;
 		return (true);
 	}

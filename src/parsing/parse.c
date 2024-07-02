@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psanger <psanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:02:04 by nburchha          #+#    #+#             */
-/*   Updated: 2024/07/02 14:04:02 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:15:23 by psanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,10 @@ static void	check_file_ending(char *path)
 		parse_error(NULL, -1, "No valid file ending");
 }
 
-static void	parse_texture_color(t_data *data, int fd)
+static void	parse_texture_color(t_data *data, int fd, int t_count, int c_count)
 {
 	char	*line;
-	int		t_count;
-	int		c_count;
 
-	t_count = 0;
-	c_count = 0;
 	line = get_next_line(fd);
 	while (line && (c_count < 2 || t_count < 4))
 	{
@@ -67,7 +63,11 @@ static void	parse_texture_color(t_data *data, int fd)
 			line[ft_strlen(line) - 1] = '\0';
 		if (!parse_color(data, fd, line, &c_count) && \
 			!parse_texture(data, fd, line, &t_count) && line[0] != '\0')
+		{
+			if (line != NULL)
+				free(line);
 			parse_error(data, fd, "Could not parse texture or color");
+		}
 		free(line);
 		if (c_count == 2 && t_count == 4)
 			break ;
@@ -85,7 +85,7 @@ void	parse(t_data *data, char *path)
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		parse_error(NULL, -1, "Could not open file");
-	parse_texture_color(data, fd);
+	parse_texture_color(data, fd, 0, 0);
 	parse_map(data, path, fd);
 	close(fd);
 }
