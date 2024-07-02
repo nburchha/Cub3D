@@ -1,0 +1,3 @@
+[submodule "inc/libs42"]
+	path = inc/libs42
+	url = https://github.com/nburchha/libs42.git
