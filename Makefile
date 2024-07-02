@@ -64,7 +64,7 @@ LIB := $(LIB_DIR)/libs42.a
 INCLUDES += -I$(LIB_DIR)
 
 # MLX42
-MLX42_DIR := MLX42
+MLX42_DIR := inc/MLX42
 MLX42 := $(MLX42_DIR)/build/libmlx42.a
 MLX42_FLAGS :=
 ifeq ($(shell uname),Darwin)
@@ -101,13 +101,14 @@ $(OBJ_DIR):
 $(LIB):
 	@echo "$(YELLOW)Compiling libs42...$(NC)"
 	@if [ ! -d $(LIB_DIR) ]; then mkdir -p $(LIB_DIR); fi
+	git submodule update --remote --init -q
 	@$(MAKE) -C $(LIB_DIR)
 
 $(MLX42):
-	@echo "$(YELLOW)Compiling MLX42...$(NC)"
+	@echo "$(YELLOW)Compiling mlx42...$(NC)"
 	@if [ ! -d $(MLX42_DIR)/build ]; then mkdir -p $(MLX42_DIR)/build; fi
-	@if [ ! -d $(MLX42_DIR) ]; then git clone https://github.com/codam-coding-college/MLX42.git; fi
-	@cd $(MLX42_DIR) && cmake -B build && cmake --build build -j4
+	git submodule update --remote --init -q
+	@cd $(MLX42_DIR)/build && cmake .. && make -j4
 
 clean:
 	@echo "$(RED)Cleaning $(NAME)...$(NC)"
