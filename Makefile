@@ -1,6 +1,6 @@
 CC = cc
 NAME = cub3D
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
 INCLUDE_DIR = inc
 HEADERS = cub3d.h
@@ -14,7 +14,7 @@ LIB = $(LIB_DIR)/libs42.a
 
 MLX_PATH = MLX42/build
 MLX42 = $(MLX_PATH)/libmlx42.a
-MLXFLAGS = -L/opt/homebrew/opt/glfw/lib -lglfw -framework OpenGL
+MLXFLAGS = -lglfw -framework OpenGL
 
 RED = \033[0;31m
 GREEN = \033[0;32m
