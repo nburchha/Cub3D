@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:02:04 by nburchha          #+#    #+#             */
-/*   Updated: 2024/07/01 18:24:19 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/02 14:04:02 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	parse_error(t_data *data, int fd, char *msg)
 		mlx_delete_texture(data->w_texture);
 	if (data->e_texture)
 		mlx_delete_texture(data->e_texture);
+	if (data->door_texture)
+		mlx_delete_texture(data->door_texture);
+	if (data->sprite_texture)
+		mlx_delete_texture(data->sprite_texture);
 	if (data->map->map)
 		free_split(data->map->map);
 	exit(1);

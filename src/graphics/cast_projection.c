@@ -6,13 +6,13 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:40:57 by psanger           #+#    #+#             */
-/*   Updated: 2024/07/01 18:19:25 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/02 11:13:41 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	get_rgba(int r, int g, int b, int a)
+static uint32_t	get_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }

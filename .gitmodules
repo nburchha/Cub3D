@@ -1,3 +1,7 @@
 [submodule "inc/libs42"]
 	path = inc/libs42
-	url = https://github.com/nburchha/libs42
+	url = https://github.com/nburchha/libs42.git
+	branch = main
+[submodule "inc/MLX42"]
+	path = inc/MLX42
+	url = https://github.com/codam-coding-college/MLX42.git
