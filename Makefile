@@ -6,7 +6,7 @@
 #    By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 14:07:46 by nburchha          #+#    #+#              #
-#    Updated: 2024/07/02 14:07:51 by nburchha         ###   ########.fr        #
+#    Updated: 2024/07/02 14:08:51 by nburchha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,13 +101,13 @@ $(OBJ_DIR):
 $(LIB):
 	@echo "$(YELLOW)Compiling libs42...$(NC)"
 	@if [ ! -d $(LIB_DIR) ]; then mkdir -p $(LIB_DIR); fi
-	git submodule update --remote --init -q
+	@git submodule update --remote --init -q
 	@$(MAKE) -C $(LIB_DIR)
 
 $(MLX42):
 	@echo "$(YELLOW)Compiling mlx42...$(NC)"
 	@if [ ! -d $(MLX42_DIR)/build ]; then mkdir -p $(MLX42_DIR)/build; fi
-	git submodule update --remote --init -q
+	@git submodule update --remote --init -q
 	@cd $(MLX42_DIR)/build && cmake .. && make -j4
 
 clean:
