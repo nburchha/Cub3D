@@ -6,7 +6,7 @@
 /*   By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 21:10:47 by nburchha          #+#    #+#             */
-/*   Updated: 2024/06/28 10:40:19 by nburchha         ###   ########.fr       */
+/*   Updated: 2024/07/02 14:02:49 by nburchha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	init_data(t_data *data, t_map *map)
 	data->s_texture = NULL;
 	data->w_texture = NULL;
 	data->e_texture = NULL;
+	data->door_texture = NULL;
+	data->sprite_texture = NULL;
 	data->map = map;
 	init_minimap_player(&mini);
 	data->minimap_player = mini;

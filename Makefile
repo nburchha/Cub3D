@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: your_username <your_email@example.com>      +#+  +:+       +#+         #
+#    By: nburchha <nburchha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/07/02 18:35:04 by your_username     #+#    #+#              #
-#    Updated: 2024/07/02 18:35:04 by your_username    ###   ########.fr        #
+#    Created: 2024/07/02 14:07:46 by nburchha          #+#    #+#              #
+#    Updated: 2024/07/02 14:07:51 by nburchha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ endif
 INCLUDES += -I$(MLX42_DIR)/include/MLX42
 
 # RULES
-all: ascii $(NAME)
+all: $(NAME)
 
 $(NAME): $(LIB) $(MLX42) $(OFILES)
 	@printf "\n$(YELLOW)Compiling $(NAME)...$(NC)\n"
@@ -115,7 +115,7 @@ clean:
 	@echo "$(RED)Removing object files...$(NC)"
 	@rm -rf $(OBJ_DIR)
 	@echo "$(RED)Cleaning libs42...$(NC)"
-	@$(MAKE) -C $(LIB_DIR) clean
+	$(MAKE) -C $(LIB_DIR) clean
 	@echo "$(RED)Cleaning MLX42...$(NC)"
 	@$(MAKE) -C $(MLX42_DIR)/build clean
 
@@ -127,7 +127,7 @@ fclean: clean
 re: fclean all
 
 norm:
-	@norminette $(SRC_DIRS) $(INC_DIR) $(LIB_DIR) | grep "Error" || echo "$(GREEN)Norme OK$(NC)"
+	@norminette $(SRC_DIRS) $(INC_DIR)/cub3D.h $(LIB_DIR) | grep "Error" || echo "$(GREEN)Norme OK$(NC)"
 
 debug: CFLAGS += -g
 debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
@@ -146,18 +146,4 @@ CYAN = \033[0;36m
 NC = \033[0m
 CLEAR_LINE = \033[2K\r
 
-# Decoration
-ascii:
-	@echo "------------------------------------------------"
-	@echo "$(CYAN)"
-	@echo "             ______          _  ______"
-	@echo "             | ___ \\        | ||  _  \\ "
-	@echo "             | |_/ /   ___  | || | | |  ___  _ __"
-	@echo "             | ___ \\  / _ \\ | || | | | / _ \\| '_ \\ "
-	@echo "             | |_/ / |  __/ | || |/ / |  __/| | | |"
-	@echo "             \\____/   \\___| |_||___/   \\___||_| |_|"
-	@echo "$(NC)"
-	@echo "------------------------------------------------"
-
-BAR_WIDTH = 50
 TOTAL_SRCS = $(words $(CFILES))
